@@ -1,5 +1,5 @@
+import loadHomePage from "./modules/app";
+
 import "./styles.css";
 
-const body = document.querySelector("body");
-
-body.textContent = "hi from index.js";
+loadHomePage();
