@@ -2,6 +2,9 @@ import PubSub from "pubsub-js";
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
 import { Events, PubSubHelper } from "./helpers";
 
+const MIN_WEEKS_IN_MONTH = 4;
+const MIN_DAYS_IN_MONTH = 28;
+
 export default class Project {
   constructor(title, emoji = "") {
     this.title = title;
@@ -24,12 +27,18 @@ export default class Project {
     return this.targets.filter(target => target instanceof MonthGoal);
   }
 
-  getWeekGoals(weekIndex) {
+  getWeekGoals(weekIndexDirty) {
+    const maxIndex = MIN_WEEKS_IN_MONTH - 1;
+    const weekIndex = weekIndexDirty > maxIndex ? maxIndex : weekIndexDirty;
+
     return this.targets.filter(
       target => target instanceof WeekGoal && target.weekIndex === weekIndex);
   }
 
-  getDayTasks(dayIndex) {
+  getDayTasks(dayIndexDirty) {
+    const maxIndex = MIN_DAYS_IN_MONTH - 1;
+    const dayIndex = dayIndexDirty > maxIndex ? maxIndex : dayIndexDirty;
+
     return this.targets.filter(
       target => target instanceof DayTask && target.dayIndex === dayIndex);
   }
@@ -50,11 +59,5 @@ export default class Project {
 
     PubSub.subscribe(Events.noteCreate,
       PubSubHelper.equalSelf(this.addNote, this, "project"));
-
-    PubSub.subscribe(Events.targetDelete,
-      PubSubHelper.equalSelf(this.removeTarget, this, "project"));
-
-    PubSub.subscribe(Events.noteDelete,
-      PubSubHelper.equalSelf(this.removeNote, this, "project"));
   }
 }

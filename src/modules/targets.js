@@ -9,8 +9,6 @@ class Target {
     this.dueDate = dueDate;
     this.project = project;
     this.completed = false;
-
-    this.configurePubSub();
   }
 
   toggleCompletion() {
@@ -30,20 +28,30 @@ class Target {
 }
 
 export class MonthGoal extends Target {
+  constructor(name, desc, dueDate, project) {
+    super(name, desc, dueDate, project);
 
+    this.configurePubSub();
+  }
 }
 
 export class WeekGoal extends Target {
   constructor(weekIndex, name, desc, dueDate, project) {
+    super(name, desc, dueDate, project);
+
     this.weekIndex = weekIndex;
     this.startDate = subDays(dueDate, 7);
-    super(name, desc, dueDate, project);
+
+    this.configurePubSub();
   }
 }
 
 export class DayTask extends Target {
   constructor(dayIndex, name, desc, dueDate, project) {
-    this.dayIndex = dayIndex;
     super(name, desc, dueDate, project);
+
+    this.dayIndex = dayIndex;
+
+    this.configurePubSub();
   }
 }
