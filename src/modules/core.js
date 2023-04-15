@@ -1,7 +1,7 @@
 import { addWeeks, lastDayOfMonth, startOfMonth } from "date-fns";
 import PubSub from "pubsub-js";
 
-import { DEFAULT_PROJECT, PROJECT_CREATE, PROJECT_DELETE } from "./constants";
+import { DEFAULT_PROJECT, Events, PubSubHelper } from "./helpers";
 import Project from "./project";
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
 import Note from "./note";
@@ -11,8 +11,7 @@ export default class Core {
     this.projects = [];
     this.projects.push(DEFAULT_PROJECT);
 
-    PubSub.subscribe(PROJECT_CREATE, (_, proj) => this.addProject(proj));
-    PubSub.subscribe(PROJECT_DELETE, (_, proj) => this.removeProject(proj));
+    this.configurePubSub();
   }
 
   addProject(project) {
@@ -48,5 +47,13 @@ export default class Core {
 
   static get today() {
     return new Date();
+  }
+
+  configurePubSub() {
+    PubSub.subscribe(Events.projectCreate,
+      PubSubHelper.simple(this.addProject, this));
+
+    PubSub.subscribe(Events.projectDelete,
+      PubSubHelper.simple(this.removeProject, this));
   }
 }

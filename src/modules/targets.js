@@ -1,5 +1,6 @@
+import PubSub from "pubsub-js";
 import { subDays } from "date-fns";
-import { DEFAULT_PROJECT } from "./constants";
+import { DEFAULT_PROJECT, Events, PubSubHelper } from "./helpers";
 
 class Target {
   constructor(name, desc, dueDate, project) {
@@ -9,7 +10,7 @@ class Target {
     this.project = project;
     this.completed = false;
 
-    project.addTarget(this);
+    this.configurePubSub();
   }
 
   toggleCompletion() {
@@ -18,6 +19,13 @@ class Target {
 
   unlinkProject() {
     this.project = DEFAULT_PROJECT;
+  }
+
+  configurePubSub() {
+    PubSub.publish(Events.targetCreate, this);
+
+    PubSub.subscribe(Events.projectDelete,
+      PubSubHelper.equalArg(this.unlinkProject, this, "project"));
   }
 }
 

@@ -1,6 +1,6 @@
 import PubSub from "pubsub-js";
-import { PROJECT_CREATE } from "./constants";
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
+import { Events, PubSubHelper } from "./helpers";
 
 export default class Project {
   constructor(title, emoji = "") {
@@ -9,7 +9,7 @@ export default class Project {
     this.targets = [];
     this.notes = [];
 
-    PubSub.publish(PROJECT_CREATE, this);
+    this.configurePubSub();
   }
 
   addTarget(target) {
@@ -40,5 +40,21 @@ export default class Project {
 
   removeNote(note) {
     this.notes.splice(this.notes.indexOf(note), 1);
+  }
+
+  configurePubSub() {
+    PubSub.publish(Events.projectCreate, this);
+
+    PubSub.subscribe(Events.targetCreate,
+      PubSubHelper.equalSelf(this.addTarget, this, "project"));
+
+    PubSub.subscribe(Events.noteCreate,
+      PubSubHelper.equalSelf(this.addNote, this, "project"));
+
+    PubSub.subscribe(Events.targetDelete,
+      PubSubHelper.equalSelf(this.removeTarget, this, "project"));
+
+    PubSub.subscribe(Events.noteDelete,
+      PubSubHelper.equalSelf(this.removeNote, this, "project"));
   }
 }
