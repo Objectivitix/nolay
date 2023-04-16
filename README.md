@@ -22,4 +22,4 @@ For those in the latter group, for those unsatisfied, for those who desire more,
 
 \- Einstein, probably
 
-(But don't [curl](https://www.psychologytoday.com/us/blog/the-right-mindset/201910/the-rise-and-grind-hustle-culture) either. [Black Swan](https://en.wikipedia.org/wiki/Black_Swan_(film)) learned that the hard way.)
+(But don't **curl** either. [Black Swan](https://en.wikipedia.org/wiki/Black_Swan_(film)) learned that the hard way.)
