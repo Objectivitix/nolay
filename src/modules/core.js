@@ -1,17 +1,16 @@
 import { addDays, addWeeks, lastDayOfMonth, startOfMonth } from "date-fns";
-import PubSub from "pubsub-js";
 
-import { DEFAULT_PROJECT, Events, PubSubHelper, range } from "./helpers";
+import { range } from "./helpers";
 import Project from "./project";
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
 import Note from "./note";
 
 export default class Core {
   constructor() {
-    this.projects = [];
-    this.projects.push(DEFAULT_PROJECT);
+    this.defaultProj = new Project("");
 
-    this.configurePubSub();
+    this.projects = [];
+    this.projects.push(this.defaultProj);
   }
 
   addProject(project) {
@@ -19,26 +18,41 @@ export default class Core {
   }
 
   createProject(title, emoji = "") {
-    return new Project(title, emoji);
+    const project = new Project(title, emoji);
+
+    this.addProject(project);
+    return project;
   }
 
-  createMonthGoal(name, desc, project = DEFAULT_PROJECT) {
+  createMonthGoal(name, desc, project = this.defaultProj) {
     const dueDate = addDays(lastDayOfMonth(Core.today), 1);
-    return new MonthGoal(name, desc, dueDate, project);
+    const monthGoal = new MonthGoal(name, desc, dueDate, project);
+
+    project.addTarget(monthGoal);
+    return monthGoal;
   }
 
-  createWeekGoal(weekIndex, name, desc, project = DEFAULT_PROJECT) {
-    const dueDate = addWeeks(startOfMonth(Core.today), weekIndex);
-    return new WeekGoal(weekIndex, name, desc, dueDate, project);
+  createWeekGoal(weekIndex, name, desc, project = this.defaultProj) {
+    const dueDate = addWeeks(startOfMonth(Core.today), weekIndex + 1);
+    const weekGoal = new WeekGoal(weekIndex, name, desc, dueDate, project);
+
+    project.addTarget(weekGoal);
+    return weekGoal;
   }
 
-  createDayTask(dayIndex, name, desc, project = DEFAULT_PROJECT) {
-    const dueDate = addDays(startOfMonth(Core.today), dayIndex);
-    return new DayTask(dayIndex, name, desc, dueDate, project);
+  createDayTask(dayIndex, name, desc, project = this.defaultProj) {
+    const dueDate = addDays(startOfMonth(Core.today), dayIndex + 1);
+    const dayTask = new DayTask(dayIndex, name, desc, dueDate, project);
+
+    project.addTarget(dayTask);
+    return dayTask;
   }
 
-  createNote(title, details, project = DEFAULT_PROJECT) {
-    return new Note(title, details, project);
+  createNote(title, details, project = this.defaultProj) {
+    const note = new Note(title, details, project);
+
+    project.addNote(note);
+    return note;
   }
 
   getMonthGoals() {
@@ -67,7 +81,7 @@ export default class Core {
     const start = weekIndex * 7;
     const stop = start + 7;
 
-    return Array.from(range(start, stop), this.getDayTasks);
+    return Array.from(range(start, stop), this.getDayTasks, this);
   }
 
   getThisWeekGoals() {
@@ -79,8 +93,13 @@ export default class Core {
   }
 
   removeProject(project) {
+    project.targets.forEach(this.unlinkItem, this);
+    project.notes.forEach(this.unlinkItem, this);
+
+    project.targets.forEach(t => this.defaultProj.addTarget(t));
+    project.notes.forEach(n => this.defaultProj.addNote(n));
+
     this.projects.splice(this.projects.indexOf(project), 1);
-    PubSub.publish(Events.projectDelete, project);
   }
 
   removeTarget(target) {
@@ -91,19 +110,15 @@ export default class Core {
     note.project.removeNote(note);
   }
 
+  unlinkItem(item) {
+    item.changeProject(this.defaultProj);
+  }
+
   static get today() {
     return new Date();
   }
 
   static get todayIndex() {
     return Core.today.getDate() - 1;
-  }
-
-  configurePubSub() {
-    PubSub.subscribe(Events.projectCreate,
-      PubSubHelper.simple(this.addProject, this));
-
-    PubSub.subscribe(Events.projectDelete,
-      PubSubHelper.simple(this.removeProject, this));
   }
 }

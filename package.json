@@ -21,7 +21,6 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "date-fns": "^2.29.3",
-    "pubsub-js": "^1.9.4"
+    "date-fns": "^2.29.3"
   }
 }
