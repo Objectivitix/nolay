@@ -1,6 +1,6 @@
 import { addDays, addWeeks, lastDayOfMonth, startOfMonth } from "date-fns";
 
-import { range } from "./helpers";
+import { range } from "./utils";
 import Project from "./project";
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
 import Note from "./note";
