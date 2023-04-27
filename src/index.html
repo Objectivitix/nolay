@@ -7,42 +7,46 @@
   <title>Nolay</title>
 </head>
 <body>
-  <header>
-    <img src="./assets/icons/logo.svg" class="logo">
+  <header class="header">
+    <img src="./assets/icons/logo.svg" class="header__logo">
     <h1>Nolay</h1>
   </header>
 
-  <aside>
-    <nav>
-      <section class="overview">
+  <aside class="sidebar">
+    <nav class="menu">
+      <section>
         <ul>
-          <li><button>Current</button></li>
-          <li><button>This Week</button></li>
-          <li><button>This Month</button></li>
-          <li><button>Notes</button></li>
+          <li><button class="menu__button">Current</button></li>
+          <li><button class="menu__button">This Week</button></li>
+          <li><button class="menu__button">This Month</button></li>
+          <li><button class="menu__button">Notes</button></li>
         </ul>
       </section>
 
       <section class="projects">
-        <header>
-          <h2>Projects</h2>
-          <button class="new"><img src="./assets/icons/new.svg"></button>
+        <header class="projects__header">
+          <h2 class="projects__title">Projects</h2>
+          <button class="projects__new"><img src="./assets/icons/new.svg"></button>
         </header>
-        <ul>
-          <li><button data-emoji="⚽️">Lorem, ipsum.</button></li>
-          <li><button data-emoji="🏀">Sapiente, nesciunt.</button></li>
-          <li><button data-emoji="🏈">Tempora, laudantium.</button></li>
-          <li><button data-emoji="⚾️">Et, totam!</button></li>
+        <ul class="projects__list">
+          <li><button class="menu__button menu__button--emoji" data-emoji="⚽️">Lorem, ipsum.</button></li>
+          <li><button class="menu__button menu__button--emoji" data-emoji="🏀">Sapiente, nesciunt.</button></li>
+          <li><button class="menu__button menu__button--emoji" data-emoji="🏈">Tempora, laudantium.</button></li>
+          <li><button class="menu__button menu__button--emoji" data-emoji="⚾️">Et, totam!</button></li>
         </ul>
       </section>
     </nav>
 
-    <footer>
+    <footer class="sidebar__footer">
       <p>crafted by objx</p>
-      <a href="https://github.com/Objectivitix/nolay" target="_blank">
-        <img src="./assets/icons/github.svg" class="github-icon">
+      <a class="sidebar__github-link" href="https://github.com/Objectivitix/nolay" target="_blank">
+        <img class="sidebar__github-icon" src="./assets/icons/github.svg">
       </a>
     </footer>
   </aside>
+
+  <main>
+
+  </main>
 </body>
 </html>
