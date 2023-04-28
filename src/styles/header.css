@@ -5,10 +5,14 @@
   gap: 1.2rem;
   background-image: linear-gradient(90deg, var(--blue), var(--green), var(--brown));
   padding: 1.5rem;
-  font-size: 2rem;
-  color: var(--white);
 }
 
 .header__logo {
   height: 100%;
+}
+
+.header__title {
+  font-family: var(--ff-prm);
+  font-size: 4rem;
+  color: var(--white); 
 }

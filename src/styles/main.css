@@ -1,3 +1,5 @@
+/* GENERAL */
+
 .main-wrapper {
   display: flex;
   justify-content: center;
@@ -12,16 +14,26 @@
   padding: 10rem 0;
 }
 
+/* UNIT */
+
 .unit {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.5rem;
 }
 
 .unit__header {
   display: flex;
   align-items: baseline;
-  gap: 2rem;
+  gap: 2.5rem;
+}
+
+.unit__title {
+  font-weight: var(--fw-med);
+}
+
+.unit__date {
+  color: var(--grey-4);
 }
 
 .unit__new {
@@ -33,24 +45,42 @@
 .targets {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 2.2rem;
+  padding-left: 0.2rem;
 }
+
+/* TARGET */
 
 .target {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
   position: relative;
   padding: 0 3.5rem;
 }
 
+.target__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.target__name {
+  font-weight: var(--fw-reg);
+}
+
 .target__project {
+  font-family: var(--ff-prm);
   font-size: var(--fs-300);
 }
 
 .target__project::before {
   content: attr(data-emoji);
   margin-right: 0.7rem;
+}
+
+.target__desc {
+  color: var(--grey-4);
 }
 
 .target__complete {

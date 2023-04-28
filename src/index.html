@@ -9,36 +9,36 @@
 <body>
   <header class="header">
     <img src="./assets/icons/logo.svg" class="header__logo">
-    <h1>Nolay</h1>
+    <h1 class="header__title">Nolay</h1>
   </header>
 
   <aside class="sidebar">
     <nav class="menu">
       <section>
         <ul>
-          <li><button class="menu__button">Current</button></li>
-          <li><button class="menu__button">This Week</button></li>
-          <li><button class="menu__button">This Month</button></li>
-          <li><button class="menu__button">Notes</button></li>
+          <li><button class="menu__button menu__tl-item">Current</button></li>
+          <li><button class="menu__button menu__tl-item">This Week</button></li>
+          <li><button class="menu__button menu__tl-item">This Month</button></li>
+          <li><button class="menu__button menu__tl-item">Notes</button></li>
         </ul>
       </section>
 
       <section class="projects">
         <header class="projects__header">
-          <h2 class="projects__title">Projects</h2>
+          <h2 class="projects__title menu__tl-item">Projects</h2>
           <button class="projects__new"><img src="./assets/icons/new.svg"></button>
         </header>
         <ul class="projects__list">
-          <li><button class="menu__button menu__button--emoji" data-emoji="⚽️">Lorem, ipsum.</button></li>
-          <li><button class="menu__button menu__button--emoji" data-emoji="🏀">Sapiente, nesciunt.</button></li>
-          <li><button class="menu__button menu__button--emoji" data-emoji="🏈">Tempora, laudantium.</button></li>
-          <li><button class="menu__button menu__button--emoji" data-emoji="⚾️">Et, totam!</button></li>
+          <li><button class="menu__button menu__button--project" data-emoji="⚽️">Lorem, ipsum.</button></li>
+          <li><button class="menu__button menu__button--project" data-emoji="🏀">Sapiente, nesciunt.</button></li>
+          <li><button class="menu__button menu__button--project" data-emoji="🏈">Tempora, laudantium.</button></li>
+          <li><button class="menu__button menu__button--project" data-emoji="⚾️">Et, totam!</button></li>
         </ul>
       </section>
     </nav>
 
     <footer class="sidebar__footer">
-      <p>crafted by objx</p>
+      <p class="sidebar__copy">crafted by objx</p>
       <a class="sidebar__github-link" href="https://github.com/Objectivitix/nolay" target="_blank">
         <img class="sidebar__github-icon" src="./assets/icons/github.svg">
       </a>
@@ -60,7 +60,7 @@
               <h3 class="target__name">complete HTML of Todo List project</h3>
               <p class="target__project" data-emoji="🌐">Webdev</p>
             </hgroup>
-            <p class="target__desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod consequatur laudantium doloribus libero unde tempora cupiditate nobis quo fugiat optio.</p>
+            <p class="target__desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi minus veniam sit dolorum libero quo doloremque dolorem amet tempora! Doloremque aliquid omnis laboriosam accusantium ducimus!</p>
             <button class="target__complete"></button>
             <button class="target__delete"><img src="./assets/icons/delete.svg"></button>
           </li>
@@ -91,13 +91,13 @@
           <button class="unit__new"><img src="./assets/icons/new.svg"></button>
         </header>
 
-        <ul>
+        <ul class="targets">
           <li class="target">
             <hgroup class="target__header">
               <h3 class="target__name">complete 20-minute Ouino session</h3>
               <p class="target__project" data-emoji="🇪🇸">Spanish</p>
             </hgroup>
-            <p class="target__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est illo ab eum at iusto dolorum vero, officia id sapiente optio.</p>
+            <p class="target__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus provident aliquid beatae sint quidem tempore voluptas nam soluta eos fuga quae numquam, reprehenderit sapiente nulla esse in maxime, laudantium dignissimos incidunt facere consequatur assumenda ex. Praesentium sunt cumque obcaecati hic, aperiam sint non voluptate corporis error quibusdam provident molestiae tempora.</p>
             <button class="target__complete"></button>
             <button class="target__delete"><img src="./assets/icons/delete.svg"></button>
           </li>
