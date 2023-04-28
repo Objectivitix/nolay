@@ -1,0 +1,74 @@
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 7rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+  max-width: 80rem;
+  padding: 10rem 0;
+}
+
+.unit {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.unit__header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.unit__new {
+  align-self: center;
+  width: 2.5rem;
+  margin-left: auto;
+}
+
+.targets {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.target {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+  padding: 0 3.5rem;
+}
+
+.target__project {
+  font-size: var(--fs-300);
+}
+
+.target__project::before {
+  content: attr(data-emoji);
+  margin-right: 0.7rem;
+}
+
+.target__complete {
+  position: absolute;
+  left: 0;
+  width: 2rem;
+  height: 2rem;
+  border: 0.2rem solid var(--black);
+  border-radius: 0.3rem;
+}
+
+.target__delete {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 2.5rem;
+}
+
+.target:hover .target__delete {
+  opacity: 1;
+}
