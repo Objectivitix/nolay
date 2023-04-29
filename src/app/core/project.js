@@ -23,20 +23,20 @@ export default class Project {
     return this.targets.filter(target => target instanceof MonthGoal);
   }
 
-  getWeekGoals(weekIndexDirty) {
-    const maxIndex = MIN_WEEKS_IN_MONTH - 1;
-    const weekIndex = weekIndexDirty > maxIndex ? maxIndex : weekIndexDirty;
+  getWeekGoals(weekNumDirty) {
+    const maxNum = MIN_WEEKS_IN_MONTH;
+    const weekNum = weekNumDirty > maxNum ? maxNum : weekNumDirty;
 
     return this.targets.filter(
-      target => target instanceof WeekGoal && target.weekIndex === weekIndex);
+      target => target instanceof WeekGoal && target.weekNum === weekNum);
   }
 
-  getDayTasks(dayIndexDirty) {
-    const maxIndex = MIN_DAYS_IN_MONTH - 1;
-    const dayIndex = dayIndexDirty > maxIndex ? maxIndex : dayIndexDirty;
+  getDayTasks(dayNumDirty) {
+    const maxNum = MIN_DAYS_IN_MONTH;
+    const dayNum = dayNumDirty > maxNum ? maxNum : dayNumDirty;
 
     return this.targets.filter(
-      target => target instanceof DayTask && target.dayIndex === dayIndex);
+      target => target instanceof DayTask && target.dayNum === dayNum);
   }
 
   removeTarget(target) {

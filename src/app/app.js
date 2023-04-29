@@ -1,5 +1,8 @@
 import Core from "./core/core";
 import Unit from "./components/unit";
+import { Dates } from "./core/utils";
+
+const main = document.querySelector("main");
 
 const nolay = new Core();
 
@@ -9,7 +12,7 @@ const star = nolay.createProject("Star", "🌠");
 const spanish = nolay.createProject("Spanish", "🇪🇸");
 
 const task1 = nolay.createDayTask(
-  0,
+  28,
   "complete HTML of Todo List project",
   `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi minus
   veniam sit dolorum libero quo doloremque dolorem amet tempora! Doloremque
@@ -18,21 +21,21 @@ const task1 = nolay.createDayTask(
 );
 
 const task2 = nolay.createDayTask(
-  0,
+  28,
   "understand the Fenwick tree and practice 1 problem",
   "",
   cp,
 );
 
 const task3 = nolay.createDayTask(
-  0,
+  28,
   "reach for the stars",
   "The essence of Nolay.",
   star,
 );
 
 const goal1 = nolay.createWeekGoal(
-  0,
+  4,
   "complete 5 20-minute Ouino sessions",
   `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
   provident aliquid beatae sint quidem tempore voluptas nam soluta eos fuga
@@ -43,12 +46,13 @@ const goal1 = nolay.createWeekGoal(
   spanish,
 );
 
-const unit1 = Unit("Day 1", "Sat Jan 1", [task1, task2, task3]);
-const unit2 = Unit("Week 1", "Jan 1 to Jan 7", [goal1]);
+export function loadCurrent() {
+  const todayNum = Dates.todayNum > 28 ? 28 : Dates.todayNum;
+  const thisWeekNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
 
-const main = document.querySelector("main");
+  const todayUnit = Unit(`Day ${todayNum}`, Dates.formatDay(todayNum), nolay.getTodayTasks());
+  const thisWeekUnit = Unit(`Week ${thisWeekNum}`, Dates.formatWeek(thisWeekNum), nolay.getThisWeekGoals());
 
-export default function load() {
-  main.appendChild(unit1);
-  main.appendChild(unit2);
+  main.appendChild(todayUnit);
+  main.appendChild(thisWeekUnit);
 }

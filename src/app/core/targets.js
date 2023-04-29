@@ -22,16 +22,16 @@ export class MonthGoal extends Target {
 }
 
 export class WeekGoal extends Target {
-  constructor(weekIndex, name, desc, dueDate, project) {
+  constructor(weekNum, name, desc, dueDate, project) {
     super(name, desc, dueDate, project);
-    this.weekIndex = weekIndex;
+    this.weekNum = weekNum;
     this.startDate = subDays(dueDate, 7);
   }
 }
 
 export class DayTask extends Target {
-  constructor(dayIndex, name, desc, dueDate, project) {
+  constructor(dayNum, name, desc, dueDate, project) {
     super(name, desc, dueDate, project);
-    this.dayIndex = dayIndex;
+    this.dayNum = dayNum;
   }
 }

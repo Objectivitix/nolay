@@ -1,6 +1,4 @@
-import { addDays, addWeeks, lastDayOfMonth, startOfMonth } from "date-fns";
-
-import { range } from "./utils";
+import { Dates, range } from "./utils";
 import Project from "./project";
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
 import Note from "./note";
@@ -25,24 +23,24 @@ export default class Core {
   }
 
   createMonthGoal(name, desc, project = this.defaultProj) {
-    const dueDate = addDays(lastDayOfMonth(Core.today), 1);
+    const dueDate = Dates.nextMonth;
     const monthGoal = new MonthGoal(name, desc, dueDate, project);
 
     project.addTarget(monthGoal);
     return monthGoal;
   }
 
-  createWeekGoal(weekIndex, name, desc, project = this.defaultProj) {
-    const dueDate = addWeeks(startOfMonth(Core.today), weekIndex + 1);
-    const weekGoal = new WeekGoal(weekIndex, name, desc, dueDate, project);
+  createWeekGoal(weekNum, name, desc, project = this.defaultProj) {
+    const dueDate = Dates.nextWeek(weekNum);
+    const weekGoal = new WeekGoal(weekNum, name, desc, dueDate, project);
 
     project.addTarget(weekGoal);
     return weekGoal;
   }
 
-  createDayTask(dayIndex, name, desc, project = this.defaultProj) {
-    const dueDate = addDays(startOfMonth(Core.today), dayIndex + 1);
-    const dayTask = new DayTask(dayIndex, name, desc, dueDate, project);
+  createDayTask(dayNum, name, desc, project = this.defaultProj) {
+    const dueDate = Dates.nextDay(dayNum);
+    const dayTask = new DayTask(dayNum, name, desc, dueDate, project);
 
     project.addTarget(dayTask);
     return dayTask;
@@ -61,15 +59,15 @@ export default class Core {
       .flat();
   }
 
-  getWeekGoals(weekIndex) {
+  getWeekGoals(weekNum) {
     return this.projects
-      .map(proj => proj.getWeekGoals(weekIndex))
+      .map(proj => proj.getWeekGoals(weekNum))
       .flat();
   }
 
-  getDayTasks(dayIndex) {
+  getDayTasks(dayNum) {
     return this.projects
-      .map(proj => proj.getDayTasks(dayIndex))
+      .map(proj => proj.getDayTasks(dayNum))
       .flat();
   }
 
@@ -77,19 +75,19 @@ export default class Core {
     return this.projects.map(proj => proj.notes).flat();
   }
 
-  getDayTasksOfWeek(weekIndex) {
-    const start = weekIndex * 7;
+  getDayTasksOfWeek(weekNum) {
+    const start = weekNum * 7;
     const stop = start + 7;
 
     return Array.from(range(start, stop), this.getDayTasks, this);
   }
 
   getThisWeekGoals() {
-    return this.getWeekGoals(Math.floor(Core.todayIndex / 7));
+    return this.getWeekGoals(Dates.thisWeekNum);
   }
 
   getTodayTasks() {
-    return this.getDayTasks(Core.todayIndex);
+    return this.getDayTasks(Dates.todayNum);
   }
 
   removeProject(project) {
@@ -112,13 +110,5 @@ export default class Core {
 
   unlinkItem(item) {
     item.changeProject(this.defaultProj);
-  }
-
-  static get today() {
-    return new Date();
-  }
-
-  static get todayIndex() {
-    return Core.today.getDate() - 1;
   }
 }

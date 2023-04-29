@@ -3,6 +3,6 @@ import "./styles/header.css";
 import "./styles/sidebar.css";
 import "./styles/main.css";
 
-import load from "./app/app";
+import { loadCurrent } from "./app/app";
 
-load();
+loadCurrent();
