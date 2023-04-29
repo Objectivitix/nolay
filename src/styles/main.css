@@ -77,6 +77,8 @@
 .target__project::before {
   content: attr(data-emoji);
   margin-right: 0.7rem;
+  font-size: var(--fs-200);
+  vertical-align: top;
 }
 
 .target__desc {
@@ -95,6 +97,7 @@
 .target__delete {
   opacity: 0;
   position: absolute;
+  top: -0.5rem; /* aligns icon better */
   right: 0;
   width: 2.5rem;
 }
