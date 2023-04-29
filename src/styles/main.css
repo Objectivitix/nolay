@@ -76,7 +76,7 @@
 
 .target__project::before {
   content: attr(data-emoji);
-  margin-right: 0.7rem;
+  margin-right: 0.5rem;
   font-size: var(--fs-200);
   vertical-align: top;
 }
