@@ -54,25 +54,19 @@ export default class Core {
   }
 
   getMonthGoals() {
-    return this.projects
-      .map(proj => proj.getMonthGoals())
-      .flat();
+    return this.projects.map((proj) => proj.getMonthGoals()).flat();
   }
 
   getWeekGoals(weekNum) {
-    return this.projects
-      .map(proj => proj.getWeekGoals(weekNum))
-      .flat();
+    return this.projects.map((proj) => proj.getWeekGoals(weekNum)).flat();
   }
 
   getDayTasks(dayNum) {
-    return this.projects
-      .map(proj => proj.getDayTasks(dayNum))
-      .flat();
+    return this.projects.map((proj) => proj.getDayTasks(dayNum)).flat();
   }
 
   getNotes() {
-    return this.projects.map(proj => proj.notes).flat();
+    return this.projects.map((proj) => proj.notes).flat();
   }
 
   getDayTasksOfWeek(weekNum) {
@@ -94,17 +88,17 @@ export default class Core {
     project.targets.forEach(this.unlinkItem, this);
     project.notes.forEach(this.unlinkItem, this);
 
-    project.targets.forEach(t => this.defaultProj.addTarget(t));
-    project.notes.forEach(n => this.defaultProj.addNote(n));
+    project.targets.forEach((t) => this.defaultProj.addTarget(t));
+    project.notes.forEach((n) => this.defaultProj.addNote(n));
 
     this.projects.splice(this.projects.indexOf(project), 1);
   }
 
-  removeTarget(target) {
+  static removeTarget(target) {
     target.project.removeTarget(target);
   }
 
-  removeNote(note) {
+  static removeNote(note) {
     note.project.removeNote(note);
   }
 

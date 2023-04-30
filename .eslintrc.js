@@ -3,17 +3,21 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'airbnb-base',
-    'prettier',
-  ],
-  overrides: [
-  ],
+  extends: ["airbnb-base", "prettier"],
+  overrides: [],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
   rules: {
-    "quotes": ["error", "double"],
+    "max-classes-per-file": "off",
+    "one-var": "off",
+    quotes: ["error", "double"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: true,
+      },
+    ],
   },
 };

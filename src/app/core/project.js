@@ -20,7 +20,7 @@ export default class Project {
   }
 
   getMonthGoals() {
-    return this.targets.filter(target => target instanceof MonthGoal);
+    return this.targets.filter((target) => target instanceof MonthGoal);
   }
 
   getWeekGoals(weekNumDirty) {
@@ -28,7 +28,8 @@ export default class Project {
     const weekNum = weekNumDirty > maxNum ? maxNum : weekNumDirty;
 
     return this.targets.filter(
-      target => target instanceof WeekGoal && target.weekNum === weekNum);
+      (target) => target instanceof WeekGoal && target.weekNum === weekNum
+    );
   }
 
   getDayTasks(dayNumDirty) {
@@ -36,7 +37,8 @@ export default class Project {
     const dayNum = dayNumDirty > maxNum ? maxNum : dayNumDirty;
 
     return this.targets.filter(
-      target => target instanceof DayTask && target.dayNum === dayNum);
+      (target) => target instanceof DayTask && target.dayNum === dayNum
+    );
   }
 
   removeTarget(target) {

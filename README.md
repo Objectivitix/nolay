@@ -14,12 +14,12 @@ For those in the latter group, for those unsatisfied, for those who desire more,
 
 **Nolay is flexible.** Achieve in your way:
 
-* More adaptable control? Don't set Daily Tasks.
-* Need a reminder? Write a Note.
-* On the go? Use the convenient mobile interface.
+- More adaptable control? Don't set Daily Tasks.
+- Need a reminder? Write a Note.
+- On the go? Use the convenient mobile interface.
 
 > One day of not laying, one step closer to success.
 
 \- Einstein, probably
 
-(But don't **curl** either. [Black Swan](https://en.wikipedia.org/wiki/Black_Swan_(film)) learned that the hard way.)
+(But don't **curl** either. [Black Swan](<https://en.wikipedia.org/wiki/Black_Swan_(film)>) learned that the hard way.)

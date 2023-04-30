@@ -11,30 +11,25 @@ const cp = nolay.createProject("Competitive Programming", "💻");
 const star = nolay.createProject("Star", "🌠");
 const spanish = nolay.createProject("Spanish", "🇪🇸");
 
-const task1 = nolay.createDayTask(
+nolay.createDayTask(
   28,
   "complete HTML of Todo List project",
   `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi minus
   veniam sit dolorum libero quo doloremque dolorem amet tempora! Doloremque
   aliquid omnis laboriosam accusantium ducimus!`,
-  webdev,
+  webdev
 );
 
-const task2 = nolay.createDayTask(
+nolay.createDayTask(
   28,
   "understand the Fenwick tree and practice 1 problem",
   "",
-  cp,
+  cp
 );
 
-const task3 = nolay.createDayTask(
-  28,
-  "reach for the stars",
-  "The essence of Nolay.",
-  star,
-);
+nolay.createDayTask(28, "reach for the stars", "The essence of Nolay.", star);
 
-const goal1 = nolay.createWeekGoal(
+nolay.createWeekGoal(
   4,
   "complete 5 20-minute Ouino sessions",
   `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
@@ -43,15 +38,23 @@ const goal1 = nolay.createWeekGoal(
   dignissimos incidunt facere consequatur assumenda ex. Praesentium sunt
   cumque obcaecati hic, aperiam sint non voluptate corporis error quibusdam
   provident molestiae tempora.`,
-  spanish,
+  spanish
 );
 
-export function loadCurrent() {
+export default function loadCurrent() {
   const todayNum = Dates.todayNum > 28 ? 28 : Dates.todayNum;
   const thisWeekNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
 
-  const todayUnit = Unit(`Day ${todayNum}`, Dates.formatDay(todayNum), nolay.getTodayTasks());
-  const thisWeekUnit = Unit(`Week ${thisWeekNum}`, Dates.formatWeek(thisWeekNum), nolay.getThisWeekGoals());
+  const todayUnit = Unit(
+    `Day ${todayNum}`,
+    Dates.formatDay(todayNum),
+    nolay.getTodayTasks()
+  );
+  const thisWeekUnit = Unit(
+    `Week ${thisWeekNum}`,
+    Dates.formatWeek(thisWeekNum),
+    nolay.getThisWeekGoals()
+  );
 
   main.appendChild(todayUnit);
   main.appendChild(thisWeekUnit);

@@ -1,21 +1,20 @@
-import { addDays, addWeeks, format, startOfMonth } from "date-fns";
+import { addDays, addMonths, addWeeks, format, startOfMonth } from "date-fns";
 
 export function* range(...args) {
   let start, stop, step;
 
   switch (args.length) {
     case 1:
+      [stop] = args;
       start = 0;
-      stop = args[0];
       step = 1;
       break;
     case 2:
-      start = args[0];
-      stop = args[1];
+      [start, stop] = args;
       step = 1;
       break;
     default:
-      [ start, stop, step ] = args;
+      [start, stop, step] = args;
   }
 
   let i = start;
@@ -66,6 +65,6 @@ export class Dates {
   static formatDay(dayNum) {
     const day = addDays(this.thisMonth, dayNum - 1);
 
-    return `${format(day, "E MMM d")}`
+    return `${format(day, "E MMM d")}`;
   }
 }

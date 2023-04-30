@@ -18,8 +18,7 @@ class Target {
   }
 }
 
-export class MonthGoal extends Target {
-}
+export class MonthGoal extends Target {}
 
 export class WeekGoal extends Target {
   constructor(weekNum, name, desc, dueDate, project) {

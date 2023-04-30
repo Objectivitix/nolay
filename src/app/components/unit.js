@@ -38,7 +38,7 @@ export default function Unit(title, date, targets) {
   const ul = document.createElement("ul");
   ul.classList.add("targets");
 
-  targets.forEach(target => ul.appendChild(Target(target)));
+  targets.forEach((target) => ul.appendChild(Target(target)));
 
   article.appendChild(Header(title, date));
   article.appendChild(ul);
