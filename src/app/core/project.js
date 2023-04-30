@@ -1,8 +1,5 @@
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
 
-const MIN_WEEKS_IN_MONTH = 4;
-const MIN_DAYS_IN_MONTH = 28;
-
 export default class Project {
   constructor(title, emoji) {
     this.title = title;
@@ -23,21 +20,15 @@ export default class Project {
     return this.targets.filter((target) => target instanceof MonthGoal);
   }
 
-  getWeekGoals(weekNumDirty) {
-    const maxNum = MIN_WEEKS_IN_MONTH;
-    const weekNum = weekNumDirty > maxNum ? maxNum : weekNumDirty;
-
+  getWeekGoals(weekNum) {
     return this.targets.filter(
-      (target) => target instanceof WeekGoal && target.weekNum === weekNum
+      (target) => target instanceof WeekGoal && target.weekNum === weekNum,
     );
   }
 
-  getDayTasks(dayNumDirty) {
-    const maxNum = MIN_DAYS_IN_MONTH;
-    const dayNum = dayNumDirty > maxNum ? maxNum : dayNumDirty;
-
+  getDayTasks(dayNum) {
     return this.targets.filter(
-      (target) => target instanceof DayTask && target.dayNum === dayNum
+      (target) => target instanceof DayTask && target.dayNum === dayNum,
     );
   }
 

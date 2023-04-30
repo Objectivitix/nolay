@@ -17,14 +17,14 @@ nolay.createDayTask(
   `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi minus
   veniam sit dolorum libero quo doloremque dolorem amet tempora! Doloremque
   aliquid omnis laboriosam accusantium ducimus!`,
-  webdev
+  webdev,
 );
 
 nolay.createDayTask(
   28,
   "understand the Fenwick tree and practice 1 problem",
   "",
-  cp
+  cp,
 );
 
 nolay.createDayTask(28, "reach for the stars", "The essence of Nolay.", star);
@@ -38,22 +38,23 @@ nolay.createWeekGoal(
   dignissimos incidunt facere consequatur assumenda ex. Praesentium sunt
   cumque obcaecati hic, aperiam sint non voluptate corporis error quibusdam
   provident molestiae tempora.`,
-  spanish
+  spanish,
 );
 
 export default function loadCurrent() {
-  const todayNum = Dates.todayNum > 28 ? 28 : Dates.todayNum;
-  const thisWeekNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
+  const dNum = Dates.todayNum > 28 ? 28 : Dates.todayNum;
+  const wNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
 
   const todayUnit = Unit(
-    `Day ${todayNum}`,
-    Dates.formatDay(todayNum),
-    nolay.getTodayTasks()
+    `Day ${dNum}`,
+    Dates.formatDay(dNum),
+    nolay.getDayTasks(dNum),
   );
+
   const thisWeekUnit = Unit(
-    `Week ${thisWeekNum}`,
-    Dates.formatWeek(thisWeekNum),
-    nolay.getThisWeekGoals()
+    `Week ${wNum}`,
+    Dates.formatWeek(wNum),
+    nolay.getWeekGoals(wNum),
   );
 
   main.appendChild(todayUnit);

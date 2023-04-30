@@ -11,14 +11,10 @@ export default class Core {
     this.projects.push(this.defaultProj);
   }
 
-  addProject(project) {
-    this.projects.push(project);
-  }
-
-  createProject(title, emoji = "") {
+  createProject(title, emoji) {
     const project = new Project(title, emoji);
 
-    this.addProject(project);
+    this.projects.push(project);
     return project;
   }
 
@@ -74,14 +70,6 @@ export default class Core {
     const stop = start + 7;
 
     return Array.from(range(start, stop), this.getDayTasks, this);
-  }
-
-  getThisWeekGoals() {
-    return this.getWeekGoals(Dates.thisWeekNum);
-  }
-
-  getTodayTasks() {
-    return this.getDayTasks(Dates.todayNum);
   }
 
   removeProject(project) {
