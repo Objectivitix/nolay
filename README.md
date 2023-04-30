@@ -1,8 +1,14 @@
 # Nolay: Simple and intensive goal management app
 
-**lay (verb)**: to cease advancement, to lay down and stay; to some, peace with the world; to others, complacency.
+**lay (verb)**:\
+to cease advancement, to lay down and stay;\
+to some, peace with the world; to others, complacency.
 
-For those in the latter group, for those unsatisfied, for those who desire more, for those seeking greatness: give me a try, for it is perchance the regimen you need.
+For those in the latter group,\
+For those unsatisfied,\
+For those who desire more,\
+For those seeking greatness:\
+Give me a try, for I am perchance the regimen you need.
 
 **Nolay is a medium-term goalsetter.** Start not laying in 5 simple steps:
 
@@ -14,7 +20,7 @@ For those in the latter group, for those unsatisfied, for those who desire more,
 
 **Nolay is flexible.** Achieve in your way:
 
-- More adaptable control? Don't set Daily Tasks.
+- Want less rigour? Don't set Daily Tasks.
 - Need a reminder? Write a Note.
 - On the go? Use the convenient mobile interface.
 
