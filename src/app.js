@@ -1,6 +1,12 @@
 import Core from "./core/core";
 import Unit from "./components/unit";
-import { Dates, range } from "./core/utils";
+import range from "./lib/range";
+import {
+  formatDay,
+  formatWeek,
+  getThisWeekNum,
+  getTodayNum,
+} from "./lib/dates";
 
 const main = document.querySelector("main");
 
@@ -70,12 +76,12 @@ function onDeleteFactory(target) {
 }
 
 export function loadCurrent() {
-  const dNum = Dates.todayNum > 28 ? 28 : Dates.todayNum;
-  const wNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
+  const dNum = getTodayNum() > 28 ? 28 : getTodayNum();
+  const wNum = getThisWeekNum() > 4 ? 4 : getThisWeekNum();
 
   const todayUnit = Unit(
     `Day ${dNum}`,
-    Dates.formatDay(dNum),
+    formatDay(dNum),
     nolay.getDayTasks(dNum),
     onNewFactory,
     onCompleteFactory,
@@ -84,7 +90,7 @@ export function loadCurrent() {
 
   const thisWeekUnit = Unit(
     `Week ${wNum}`,
-    Dates.formatWeek(wNum),
+    formatWeek(wNum),
     nolay.getWeekGoals(wNum),
     onNewFactory,
     onCompleteFactory,
@@ -96,11 +102,11 @@ export function loadCurrent() {
 }
 
 export function loadThisWeek() {
-  const wNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
+  const wNum = getThisWeekNum() > 4 ? 4 : getThisWeekNum();
 
   const thisWeekUnit = Unit(
     `Week ${wNum}`,
-    Dates.formatWeek(wNum),
+    formatWeek(wNum),
     nolay.getWeekGoals(wNum),
     onNewFactory,
     onCompleteFactory,
@@ -113,13 +119,15 @@ export function loadThisWeek() {
   const stop = start + 7;
 
   for (const dNum of range(start, stop)) {
-    main.appendChild(Unit(
-      `Day ${dNum}`,
-      Dates.formatDay(dNum),
-      nolay.getDayTasks(dNum),
-      onNewFactory,
-      onCompleteFactory,
-      onDeleteFactory,
-    ));
+    main.appendChild(
+      Unit(
+        `Day ${dNum}`,
+        formatDay(dNum),
+        nolay.getDayTasks(dNum),
+        onNewFactory,
+        onCompleteFactory,
+        onDeleteFactory,
+      ),
+    );
   }
 }

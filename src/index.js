@@ -1,8 +1,5 @@
-import "./styles/global.css";
-import "./styles/header.css";
-import "./styles/sidebar.css";
-import "./styles/main.css";
+import "./stylesInit";
 
-import { loadThisWeek } from "./app/app";
+import { loadThisWeek } from "./app";
 
 loadThisWeek();

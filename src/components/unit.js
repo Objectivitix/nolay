@@ -1,5 +1,5 @@
-import NEW from "../../assets/icons/new.svg";
-import DELETE from "../../assets/icons/delete.svg";
+import NEW from "../assets/icons/new.svg";
+import DELETE from "../assets/icons/delete.svg";
 
 function Header(title, date, onNew) {
   const header = document.createElement("header");

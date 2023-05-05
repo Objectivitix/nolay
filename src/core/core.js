@@ -1,7 +1,7 @@
-import { Dates, range } from "./utils";
 import Project from "./project";
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
 import Note from "./note";
+import { getNextDay, getNextMonth, getNextWeek } from "../lib/dates";
 
 export default class Core {
   constructor() {
@@ -19,7 +19,7 @@ export default class Core {
   }
 
   createMonthGoal(name, desc, project = this.defaultProj) {
-    const dueDate = Dates.nextMonth;
+    const dueDate = getNextMonth();
     const monthGoal = new MonthGoal(name, desc, dueDate, project);
 
     project.addTarget(monthGoal);
@@ -27,7 +27,7 @@ export default class Core {
   }
 
   createWeekGoal(weekNum, name, desc, project = this.defaultProj) {
-    const dueDate = Dates.nextWeek(weekNum);
+    const dueDate = getNextWeek();
     const weekGoal = new WeekGoal(weekNum, name, desc, dueDate, project);
 
     project.addTarget(weekGoal);
@@ -35,7 +35,7 @@ export default class Core {
   }
 
   createDayTask(dayNum, name, desc, project = this.defaultProj) {
-    const dueDate = Dates.nextDay(dayNum);
+    const dueDate = getNextDay();
     const dayTask = new DayTask(dayNum, name, desc, dueDate, project);
 
     project.addTarget(dayTask);
