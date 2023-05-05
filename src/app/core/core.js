@@ -82,14 +82,6 @@ export default class Core {
     this.projects.splice(this.projects.indexOf(project), 1);
   }
 
-  static removeTarget(target) {
-    target.project.removeTarget(target);
-  }
-
-  static removeNote(note) {
-    note.project.removeNote(note);
-  }
-
   unlinkItem(item) {
     item.changeProject(this.defaultProj);
   }

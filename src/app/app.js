@@ -58,7 +58,7 @@ function onCompleteFactory(target) {
 
 function onDeleteFactory(target) {
   function onDelete(evt) {
-    Core.removeTarget(target);
+    target.remove();
 
     const li = evt.target.closest(".target");
     li.remove();

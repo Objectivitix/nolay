@@ -9,12 +9,16 @@ class Target {
     this.completed = false;
   }
 
+  changeProject(newProject) {
+    this.project = newProject;
+  }
+
   toggleCompletion() {
     this.completed = !this.completed;
   }
 
-  changeProject(newProject) {
-    this.project = newProject;
+  remove() {
+    this.project.removeTarget(this);
   }
 }
 

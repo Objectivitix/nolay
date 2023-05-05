@@ -8,4 +8,8 @@ export default class Note {
   changeProject(newProject) {
     this.project = newProject;
   }
+
+  remove() {
+    this.project.removeTarget(this);
+  }
 }
