@@ -49,6 +49,10 @@ export default class Core {
     return note;
   }
 
+  getProjects() {
+    return this.projects.filter((proj) => proj !== this.defaultProj);
+  }
+
   getMonthGoals() {
     return this.projects.map((proj) => proj.getMonthGoals()).flat();
   }

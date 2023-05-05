@@ -7,8 +7,10 @@ import {
   getThisWeekNum,
   getTodayNum,
 } from "./lib/dates";
+import ProjectTab from "./components/projectTab";
 
 const main = document.querySelector("main");
+const projectsList = document.querySelector(".projects__list");
 
 const nolay = new Core();
 
@@ -46,6 +48,12 @@ nolay.createWeekGoal(
   provident molestiae tempora.`,
   spanish,
 );
+
+export function loadProjectsList() {
+  nolay
+    .getProjects()
+    .forEach((project) => projectsList.appendChild(ProjectTab(project)));
+}
 
 function onNewFactory(title) {
   return () => console.log(`new target for ${title}`);

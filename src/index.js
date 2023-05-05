@@ -1,5 +1,6 @@
 import "./stylesInit";
 
-import { loadThisWeek } from "./app";
+import { loadProjectsList, loadThisWeek } from "./app";
 
+loadProjectsList();
 loadThisWeek();
