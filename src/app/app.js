@@ -12,7 +12,7 @@ const star = nolay.createProject("Star", "🌠");
 const spanish = nolay.createProject("Spanish", "🇪🇸");
 
 nolay.createDayTask(
-  28,
+  4,
   "complete HTML of Todo List project",
   `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi minus
   veniam sit dolorum libero quo doloremque dolorem amet tempora! Doloremque
@@ -21,16 +21,16 @@ nolay.createDayTask(
 );
 
 nolay.createDayTask(
-  28,
+  4,
   "understand the Fenwick tree and practice 1 problem",
   "",
   cp,
 );
 
-nolay.createDayTask(28, "reach for the stars", "The essence of Nolay.", star);
+nolay.createDayTask(4, "reach for the stars", "The essence of Nolay.", star);
 
 nolay.createWeekGoal(
-  4,
+  1,
   "complete 5 20-minute Ouino sessions",
   `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
   provident aliquid beatae sint quidem tempore voluptas nam soluta eos fuga
@@ -41,6 +41,34 @@ nolay.createWeekGoal(
   spanish,
 );
 
+function onNewFactory(title) {
+  return () => console.log(`new target for ${title}`);
+}
+
+function onCompleteFactory(target) {
+  function onComplete(evt) {
+    target.toggleCompletion();
+    evt.target.classList.add("on");
+
+    console.log(target);
+  }
+
+  return onComplete;
+}
+
+function onDeleteFactory(target) {
+  function onDelete(evt) {
+    Core.removeTarget(target);
+
+    const li = evt.target.closest(".target");
+    li.remove();
+
+    console.log(nolay.getDayTasks(4));
+  }
+
+  return onDelete;
+}
+
 export default function loadCurrent() {
   const dNum = Dates.todayNum > 28 ? 28 : Dates.todayNum;
   const wNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
@@ -49,12 +77,18 @@ export default function loadCurrent() {
     `Day ${dNum}`,
     Dates.formatDay(dNum),
     nolay.getDayTasks(dNum),
+    onNewFactory,
+    onCompleteFactory,
+    onDeleteFactory,
   );
 
   const thisWeekUnit = Unit(
     `Week ${wNum}`,
     Dates.formatWeek(wNum),
     nolay.getWeekGoals(wNum),
+    onNewFactory,
+    onCompleteFactory,
+    onDeleteFactory,
   );
 
   main.appendChild(todayUnit);
