@@ -65,13 +65,6 @@ export default class Core {
     return this.projects.map((proj) => proj.notes).flat();
   }
 
-  getDayTasksOfWeek(weekNum) {
-    const start = weekNum * 7;
-    const stop = start + 7;
-
-    return Array.from(range(start, stop), this.getDayTasks, this);
-  }
-
   removeProject(project) {
     project.targets.forEach(this.unlinkItem, this);
     project.notes.forEach(this.unlinkItem, this);

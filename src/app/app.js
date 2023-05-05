@@ -1,6 +1,6 @@
 import Core from "./core/core";
 import Unit from "./components/unit";
-import { Dates } from "./core/utils";
+import { Dates, range } from "./core/utils";
 
 const main = document.querySelector("main");
 
@@ -69,7 +69,7 @@ function onDeleteFactory(target) {
   return onDelete;
 }
 
-export default function loadCurrent() {
+export function loadCurrent() {
   const dNum = Dates.todayNum > 28 ? 28 : Dates.todayNum;
   const wNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
 
@@ -93,4 +93,33 @@ export default function loadCurrent() {
 
   main.appendChild(todayUnit);
   main.appendChild(thisWeekUnit);
+}
+
+export function loadThisWeek() {
+  const wNum = Dates.thisWeekNum > 4 ? 4 : Dates.thisWeekNum;
+
+  const thisWeekUnit = Unit(
+    `Week ${wNum}`,
+    Dates.formatWeek(wNum),
+    nolay.getWeekGoals(wNum),
+    onNewFactory,
+    onCompleteFactory,
+    onDeleteFactory,
+  );
+
+  main.appendChild(thisWeekUnit);
+
+  const start = wNum * 7 - 6;
+  const stop = start + 7;
+
+  for (const dNum of range(start, stop)) {
+    main.appendChild(Unit(
+      `Day ${dNum}`,
+      Dates.formatDay(dNum),
+      nolay.getDayTasks(dNum),
+      onNewFactory,
+      onCompleteFactory,
+      onDeleteFactory,
+    ));
+  }
 }
