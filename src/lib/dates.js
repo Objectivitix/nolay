@@ -46,5 +46,5 @@ export function formatWeek(weekNum) {
 export function formatDay(dayNum) {
   const day = addDays(getThisMonth(), dayNum - 1);
 
-  return `${format(day, "E MMM d")}`;
+  return `${format(day, "EEEE")}`;
 }
