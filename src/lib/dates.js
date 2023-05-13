@@ -35,6 +35,10 @@ export function getNextDay(dayNum) {
   return addDays(getThisMonth(), dayNum);
 }
 
+export function formatThisMonth() {
+  return format(getThisMonth(), "MMMM");
+}
+
 export function formatWeek(weekNum) {
   const firstDay = addWeeks(getThisMonth(), weekNum - 1);
   const lastDay = addDays(firstDay, 6);
@@ -46,5 +50,5 @@ export function formatWeek(weekNum) {
 export function formatDay(dayNum) {
   const day = addDays(getThisMonth(), dayNum - 1);
 
-  return `${format(day, "EEEE")}`;
+  return format(day, "EEEE");
 }

@@ -47,7 +47,7 @@
   width: 2.5rem;
 }
 
-.projects__list {
+.projects__tabs {
   max-height: 20rem;
   overflow: auto;
 }

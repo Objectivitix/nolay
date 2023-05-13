@@ -1,5 +1,7 @@
 import Project from "./Project";
-import { DayTask, MonthGoal, WeekGoal } from "./targets";
+import DayTask from "./targets/DayTask";
+import MonthGoal from "./targets/MonthGoal";
+import WeekGoal from "./targets/WeekGoal";
 import Note from "./Note";
 import { getNextDay, getNextMonth, getNextWeek } from "../lib/dates";
 

@@ -1,4 +1,6 @@
-import { DayTask, MonthGoal, WeekGoal } from "./targets";
+import DayTask from "./targets/DayTask";
+import MonthGoal from "./targets/MonthGoal";
+import WeekGoal from "./targets/WeekGoal";
 
 export default class Project {
   constructor(title, emoji) {

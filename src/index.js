@@ -4,8 +4,8 @@ import "./styles/sidebar.css";
 import "./styles/main.css";
 import "./styles/modals.css";
 
-import { initModals, loadProjectsList, loadThisWeek } from "./app";
+import App from "./App";
 
-initModals();
-loadProjectsList();
-loadThisWeek();
+const app = new App();
+
+app.initialize();

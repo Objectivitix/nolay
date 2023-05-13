@@ -1,19 +1,4 @@
-import NEW from "../assets/icons/new.svg";
-import DELETE from "../assets/icons/delete.svg";
-
-function Header(title, date, onNew) {
-  const header = document.createElement("header");
-  header.classList.add("unit__header");
-
-  header.innerHTML = `
-    <h2 class="unit__title">${title}</h2>
-    <p class="unit__date">${date}</p>
-    <button class="unit__new"><img src="${NEW}"></button>`;
-
-  header.querySelector(".unit__new").addEventListener("click", onNew);
-
-  return header;
-}
+import DELETE from "../../assets/icons/delete.svg";
 
 function Target(target, onComplete, onDelete) {
   const li = document.createElement("li");
@@ -37,10 +22,8 @@ function Target(target, onComplete, onDelete) {
 }
 
 export default function Unit(
-  title,
-  date,
+  header,
   targets,
-  onNewFactory,
   onCompleteFactory,
   onDeleteFactory,
 ) {
@@ -56,7 +39,7 @@ export default function Unit(
     ),
   );
 
-  article.appendChild(Header(title, date, onNewFactory(title)));
+  article.appendChild(header);
   article.appendChild(ul);
 
   return article;
