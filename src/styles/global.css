@@ -9,6 +9,7 @@
 *::after {
   box-sizing: border-box;
   padding: 0;
+  border: none;
   margin: 0;
 }
 
@@ -79,7 +80,6 @@ img {
 button {
   cursor: pointer;
   background: none;
-  border: none;
 }
 
 /* PAGE-WIDE LAYOUT */

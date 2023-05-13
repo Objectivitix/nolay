@@ -1,6 +1,6 @@
-import Project from "./project";
+import Project from "./Project";
 import { DayTask, MonthGoal, WeekGoal } from "./targets";
-import Note from "./note";
+import Note from "./Note";
 import { getNextDay, getNextMonth, getNextWeek } from "../lib/dates";
 
 export default class Core {

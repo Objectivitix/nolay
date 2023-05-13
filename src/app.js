@@ -1,5 +1,5 @@
-import Core from "./core/core";
-import Unit from "./components/unit";
+import Core from "./core/Core";
+import Unit from "./components/Unit";
 import range from "./lib/range";
 import {
   formatDay,
@@ -7,7 +7,8 @@ import {
   getThisWeekNum,
   getTodayNum,
 } from "./lib/dates";
-import ProjectTab from "./components/projectTab";
+import ProjectTab from "./components/ProjectTab";
+import BaseModal from "./components/modals/BaseModal";
 
 const main = document.querySelector("main");
 const projectsList = document.querySelector(".projects__list");
@@ -20,7 +21,7 @@ const star = nolay.createProject("Star", "🌠");
 const spanish = nolay.createProject("Spanish", "🇪🇸");
 
 nolay.createDayTask(
-  4,
+  12,
   "complete HTML of Todo List project",
   `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi minus
   veniam sit dolorum libero quo doloremque dolorem amet tempora! Doloremque
@@ -29,16 +30,16 @@ nolay.createDayTask(
 );
 
 nolay.createDayTask(
-  4,
+  12,
   "understand the Fenwick tree and practice 1 problem",
   "",
   cp,
 );
 
-nolay.createDayTask(4, "reach for the stars", "The essence of Nolay.", star);
+nolay.createDayTask(12, "reach for the stars", "The essence of Nolay.", star);
 
 nolay.createWeekGoal(
-  1,
+  2,
   "complete 5 20-minute Ouino sessions",
   `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
   provident aliquid beatae sint quidem tempore voluptas nam soluta eos fuga
@@ -49,6 +50,16 @@ nolay.createWeekGoal(
   spanish,
 );
 
+function onSubmitFactory(form) {
+  return () => console.log(form);
+}
+
+const modal = BaseModal("subject", "title", onSubmitFactory);
+
+export function initModals() {
+  main.append(modal);
+}
+
 export function loadProjectsList() {
   nolay
     .getProjects()
@@ -56,7 +67,7 @@ export function loadProjectsList() {
 }
 
 function onNewFactory(title) {
-  return () => console.log(`new target for ${title}`);
+  return () => modal.showModal();
 }
 
 function onCompleteFactory(target) {
