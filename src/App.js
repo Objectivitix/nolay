@@ -1,3 +1,4 @@
+import range from "./lib/range";
 import { getThisWeekNum, getTodayNum } from "./lib/dates";
 import Core from "./core/Core";
 import ProjectTab from "./components/ProjectTab";
@@ -16,7 +17,7 @@ export default class App {
   initialize() {
     this.createExamples();
     this.loadProjectTabs();
-    this.loadCurrent();
+    this.loadThisWeek();
   }
 
   loadCurrent() {
@@ -25,6 +26,19 @@ export default class App {
 
     MAIN.appendChild(this.createDayUnit(day));
     MAIN.appendChild(this.createWeekUnit(week));
+  }
+
+  loadThisWeek() {
+    const week = getThisWeekNum() > 4 ? 4 : getThisWeekNum();
+
+    const start = week * 7 - 6;
+    const stop = start + 7;
+
+    MAIN.appendChild(this.createWeekUnit(week));
+
+    for (const day of range(start, stop)) {
+      MAIN.appendChild(this.createDayUnit(day));
+    }
   }
 
   loadProjectTabs() {
