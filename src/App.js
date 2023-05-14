@@ -45,7 +45,14 @@ export default class App {
 
   loadProjectTabs() {
     this.$.getProjects().forEach((project) =>
-      PROJ.appendChild(ProjectTab(project)),
+      PROJ.appendChild(
+        ProjectTab(project, (evt) => {
+          const li = evt.target.closest(".project");
+
+          this.$.removeProject(project);
+          li.remove();
+        }),
+      ),
     );
   }
 
