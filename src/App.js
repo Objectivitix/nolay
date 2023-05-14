@@ -5,6 +5,8 @@ import ProjectTab from "./components/ProjectTab";
 import MonthUnit from "./components/units/MonthUnit";
 import WeekUnit from "./components/units/WeekUnit";
 import DayUnit from "./components/units/DayUnit";
+import NewTargetModal from "./components/modals/NewTargetModal";
+import BaseModal from "./components/modals/BaseModal";
 
 const MAIN = document.querySelector("main");
 const PROJ = document.querySelector(".projects__tabs");
@@ -70,7 +72,15 @@ export default class App {
     return DayUnit(
       num,
       this.$.getDayTasks(num),
-      () => console.log(`added on Day ${num} unit!`),
+      () => {
+        const modal = NewTargetModal(
+          `Create a new Task for Day ${num}`,
+          this.$.projects,
+          (evt) => console.log(evt),
+        );
+        MAIN.appendChild(modal);
+        modal.showModal();
+      },
       App.onTargetComplete,
       App.onTargetDelete,
     );
