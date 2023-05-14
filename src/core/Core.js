@@ -1,9 +1,9 @@
+import { getNextDay, getNextMonth, getNextWeek } from "../lib/dates";
 import Project from "./Project";
 import DayTask from "./targets/DayTask";
 import MonthGoal from "./targets/MonthGoal";
 import WeekGoal from "./targets/WeekGoal";
 import Note from "./Note";
-import { getNextDay, getNextMonth, getNextWeek } from "../lib/dates";
 
 export default class Core {
   constructor() {
