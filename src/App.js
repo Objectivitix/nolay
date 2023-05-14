@@ -7,6 +7,7 @@ import WeekUnit from "./components/units/WeekUnit";
 import DayUnit from "./components/units/DayUnit";
 import NewTargetModal from "./components/modals/NewTargetModal";
 import BaseModal from "./components/modals/BaseModal";
+import Target from "./components/units/Target";
 
 const MAIN = document.querySelector("main");
 const PROJ = document.querySelector(".projects__tabs");
@@ -139,7 +140,7 @@ export default class App {
   }
 
   onUnitNew(modalTitle, createTarget, num = -1) {
-    return App.makeModalHandler(() =>
+    return App.makeModalHandler((parentEvent) =>
       NewTargetModal(modalTitle, this.$.projects, (evt) => {
         const data = new FormData(evt.target);
 
@@ -153,17 +154,26 @@ export default class App {
           args.unshift(num);
         }
 
-        createTarget.bind(this.$)(...args);
+        const target = createTarget.bind(this.$)(...args);
 
-        MAIN.innerHTML = "";
-        this.loadThisWeek();
+        const ul = parentEvent.target
+          .closest(".unit")
+          .querySelector(".targets");
+
+        ul.appendChild(
+          Target(
+            target,
+            App.onTargetComplete(target),
+            App.onTargetDelete(target),
+          ),
+        );
       }),
     );
   }
 
   static makeModalHandler(createModal) {
-    return () => {
-      const modal = createModal();
+    return (parentEvent) => {
+      const modal = createModal(parentEvent);
 
       MAIN.appendChild(modal);
       modal.showModal();

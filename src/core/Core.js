@@ -29,7 +29,7 @@ export default class Core {
   }
 
   createWeekGoal(weekNum, name, desc, project = this.defaultProj) {
-    const dueDate = getNextWeek();
+    const dueDate = getNextWeek(weekNum);
     const weekGoal = new WeekGoal(weekNum, name, desc, dueDate, project);
 
     project.addTarget(weekGoal);
@@ -37,7 +37,7 @@ export default class Core {
   }
 
   createDayTask(dayNum, name, desc, project = this.defaultProj) {
-    const dueDate = getNextDay();
+    const dueDate = getNextDay(dayNum);
     const dayTask = new DayTask(dayNum, name, desc, dueDate, project);
 
     project.addTarget(dayTask);
