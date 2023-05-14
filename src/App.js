@@ -52,7 +52,10 @@ export default class App {
   createMonthUnit() {
     return MonthUnit(
       this.$.getMonthGoals(),
-      () => console.log("added on Month unit!"),
+      this.onUnitNew(
+        "Create a new Goal for this month",
+        this.$.createMonthGoal,
+      ),
       App.onTargetComplete,
       App.onTargetDelete,
     );
@@ -62,7 +65,11 @@ export default class App {
     return WeekUnit(
       num,
       this.$.getWeekGoals(num),
-      () => console.log(`added on Week ${num} unit!`),
+      this.onUnitNew(
+        `Create a new Goal for Week ${num}`,
+        this.$.createWeekGoal,
+        num,
+      ),
       App.onTargetComplete,
       App.onTargetDelete,
     );
@@ -72,15 +79,11 @@ export default class App {
     return DayUnit(
       num,
       this.$.getDayTasks(num),
-      () => {
-        const modal = NewTargetModal(
-          `Create a new Task for Day ${num}`,
-          this.$.projects,
-          (evt) => console.log(evt),
-        );
-        MAIN.appendChild(modal);
-        modal.showModal();
-      },
+      this.onUnitNew(
+        `Create a new Task for Day ${num}`,
+        this.$.createDayTask,
+        num,
+      ),
       App.onTargetComplete,
       App.onTargetDelete,
     );
@@ -126,6 +129,38 @@ export default class App {
       provident molestiae tempora.`,
       spanish,
     );
+  }
+
+  onUnitNew(modalTitle, createTarget, num = -1) {
+    return App.makeModalHandler(() =>
+      NewTargetModal(modalTitle, this.$.projects, (evt) => {
+        const data = new FormData(evt.target);
+
+        const args = [
+          data.get("name"),
+          data.get("desc"),
+          this.$.projects[data.get("proj")],
+        ];
+
+        if (num !== -1) {
+          args.unshift(num);
+        }
+
+        createTarget.bind(this.$)(...args);
+
+        MAIN.innerHTML = "";
+        this.loadThisWeek();
+      }),
+    );
+  }
+
+  static makeModalHandler(createModal) {
+    return () => {
+      const modal = createModal();
+
+      MAIN.appendChild(modal);
+      modal.showModal();
+    };
   }
 
   static onTargetComplete(target) {

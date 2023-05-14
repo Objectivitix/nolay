@@ -19,6 +19,7 @@ export default function NewTargetModal(title, projects, onSubmit) {
     <label class="new-target__container new-target__container--name">
       <p class="new-target__label new-target__label--name">Name</p>
       <input
+        name="name"
         class="new-target__control new-target__control--name"
         type="text"
         maxlength="70"
@@ -29,13 +30,17 @@ export default function NewTargetModal(title, projects, onSubmit) {
     <label class="new-target__container new-target__container--desc">
       <p class="new-target__label new-target__label--desc">Description</p>
       <textarea
+        name="desc"
         class="new-target__control new-target__control--desc"
         maxlength="500"
       ></textarea>
     </label>
     <label class="new-target__container new-target__container--proj">
       <p class="new-target__label new-target__label--proj">Project</p>
-      <select class="new-target__control new-target__control--proj"></select>
+      <select
+        name="proj"
+        class="new-target__control new-target__control--proj"
+      ></select>
     </label>`,
   );
 

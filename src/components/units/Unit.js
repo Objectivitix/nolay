@@ -11,7 +11,11 @@ function Target(target, onComplete, onDelete) {
         ${target.project.title}
       </p>
     </hgroup>
-    ${target.desc ? `<p class="target__desc">${target.desc}</p>` : ""}
+    ${
+      target.desc && /\S/.test(target.desc)
+        ? `<p class="target__desc">${target.desc}</p>`
+        : ""
+    }
     <button class="target__complete"></button>
     <button class="target__delete"><img src="${DELETE}"></button>`;
 
