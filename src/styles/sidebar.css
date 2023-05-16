@@ -16,6 +16,10 @@
   gap: 5rem;
 }
 
+.menu__tl-item {
+  font-size: var(--fs-500);
+}
+
 .menu__button {
   text-align: left;
   width: 100%;
@@ -25,10 +29,6 @@
 .menu__button--active {
   background-color: var(--grey-2);
   font-weight: var(--fw-bld);
-}
-
-.menu__tl-item {
-  font-size: var(--fs-500);
 }
 
 /* PROJECTS */
@@ -60,17 +60,11 @@
 }
 
 .project {
-  display: flex;
-  gap: 1rem;
-  padding: 0 var(--padding-lr);
-}
-
-.project--active {
-  background-color: var(--grey-2);
+  position: relative;
 }
 
 .menu__button--project {
-  padding: 1.2rem 0;
+  padding: 1.2rem var(--padding-lr);
 }
 
 .menu__button--project::before {
@@ -80,10 +74,21 @@
 
 .project__delete {
   display: none;
-  width: 2.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: var(--padding-lr);
+  width: 2.25rem;
 }
 
-.project:hover .project__delete {
+.project:not(.project--active):hover .menu__button {
+  padding-right: 7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project:not(.project--active):hover .project__delete {
   display: initial;
 }
 

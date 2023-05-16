@@ -34,17 +34,21 @@ export default class App {
         MAIN.innerHTML = "";
 
         this.activeMenuButton.classList.remove("menu__button--active");
-        this.activeMenuButton.closest(".project")?.classList.remove("project--active");
         button.classList.add("menu__button--active");
-        button.closest(".project")?.classList.add("project--active");
 
         this.activeMenuButton = button;
       }),
     );
 
-    nav.querySelector("[data-current]").addEventListener("click", this.loadCurrent.bind(this));
-    nav.querySelector("[data-week]").addEventListener("click", this.loadThisWeek.bind(this));
-    nav.querySelector("[data-month]").addEventListener("click", this.loadThisMonth.bind(this));
+    nav
+      .querySelector("[data-current]")
+      .addEventListener("click", this.loadCurrent.bind(this));
+    nav
+      .querySelector("[data-week]")
+      .addEventListener("click", this.loadThisWeek.bind(this));
+    nav
+      .querySelector("[data-month]")
+      .addEventListener("click", this.loadThisMonth.bind(this));
   }
 
   loadCurrent() {
