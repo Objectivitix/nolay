@@ -8,18 +8,43 @@ import Core from "./core/Core";
 import { getThisWeekNumBounded, getTodayNumBounded } from "./lib/dates";
 import range from "./lib/range";
 
+const HOME = document.querySelector("[data-current]");
 const MAIN = document.querySelector("main");
 const PROJ = document.querySelector(".projects__tabs");
 
 export default class App {
   constructor() {
     this.$ = new Core();
+    this.activeMenuButton = HOME;
   }
 
   initialize() {
     this.createExamples();
     this.loadProjectTabs();
-    this.loadThisMonth();
+    this.bindMainMenu();
+    this.loadCurrent();
+  }
+
+  bindMainMenu() {
+    const nav = document.querySelector(".menu");
+    const buttons = nav.querySelectorAll(".menu__button");
+
+    buttons.forEach((button) =>
+      button.addEventListener("click", () => {
+        MAIN.innerHTML = "";
+
+        this.activeMenuButton.classList.remove("menu__button--active");
+        this.activeMenuButton.closest(".project")?.classList.remove("project--active");
+        button.classList.add("menu__button--active");
+        button.closest(".project")?.classList.add("project--active");
+
+        this.activeMenuButton = button;
+      }),
+    );
+
+    nav.querySelector("[data-current]").addEventListener("click", this.loadCurrent.bind(this));
+    nav.querySelector("[data-week]").addEventListener("click", this.loadThisWeek.bind(this));
+    nav.querySelector("[data-month]").addEventListener("click", this.loadThisMonth.bind(this));
   }
 
   loadCurrent() {

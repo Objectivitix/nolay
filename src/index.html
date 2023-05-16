@@ -16,14 +16,20 @@
       <nav class="menu">
         <section>
           <ul>
-            <li><button class="menu__button menu__tl-item">Current</button></li>
             <li>
-              <button class="menu__button menu__tl-item">This Week</button>
+              <button data-current class="menu__button menu__tl-item menu__button--active">
+                Current
+              </button>
             </li>
             <li>
-              <button class="menu__button menu__tl-item">This Month</button>
+              <button data-week class="menu__button menu__tl-item">This Week</button>
             </li>
-            <li><button class="menu__button menu__tl-item">Notes</button></li>
+            <li>
+              <button data-month class="menu__button menu__tl-item">This Month</button>
+            </li>
+            <li>
+              <button data-notes class="menu__button menu__tl-item">Notes</button>
+            </li>
           </ul>
         </section>
 

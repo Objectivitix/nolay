@@ -97,6 +97,6 @@ button {
 body {
   display: grid;
   grid-template-rows: 7rem 1fr;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 16vw 1fr;
   min-height: 100vh;
 }
