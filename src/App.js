@@ -1,4 +1,4 @@
-import { getThisWeekNum, getTodayNum } from "./lib/dates";
+import { getThisWeekNumBounded, getTodayNumBounded } from "./lib/dates";
 import range from "./lib/range";
 import Core from "./core/Core";
 import Target from "./components/units/Target";
@@ -20,24 +20,34 @@ export default class App {
   initialize() {
     this.createExamples();
     this.loadProjectTabs();
-    this.loadThisWeek();
+    this.loadThisMonth();
   }
 
   loadCurrent() {
-    const day = getTodayNum() > 28 ? 28 : getTodayNum();
-    const week = getThisWeekNum() > 4 ? 4 : getThisWeekNum();
+    const day = getTodayNumBounded();
+    const week = getThisWeekNumBounded();
 
     MAIN.appendChild(this.createDayUnit(day));
     MAIN.appendChild(this.createWeekUnit(week));
   }
 
   loadThisWeek() {
-    const week = getThisWeekNum() > 4 ? 4 : getThisWeekNum();
+    this.loadWeek(getThisWeekNumBounded());
+  }
 
-    const start = week * 7 - 6;
+  loadThisMonth() {
+    MAIN.appendChild(this.createMonthUnit());
+
+    for (const week of range(1, 5)) {
+      this.loadWeek(week);
+    }
+  }
+
+  loadWeek(num) {
+    const start = num * 7 - 6;
     const stop = start + 7;
 
-    MAIN.appendChild(this.createWeekUnit(week));
+    MAIN.appendChild(this.createWeekUnit(num));
 
     for (const day of range(start, stop)) {
       MAIN.appendChild(this.createDayUnit(day));
@@ -156,9 +166,14 @@ export default class App {
 
         const target = createTarget.bind(this.$)(...args);
 
-        const ul = parentEvent.target
-          .closest(".unit")
-          .querySelector(".targets");
+        const unit = parentEvent.target.closest(".unit");
+        let ul = unit.querySelector(".targets");
+
+        if (!ul) {
+          ul = document.createElement("ul");
+          ul.classList.add("targets");
+          unit.appendChild(ul);
+        }
 
         ul.appendChild(
           Target(

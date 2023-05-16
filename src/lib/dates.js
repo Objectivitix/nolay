@@ -15,12 +15,20 @@ function getThisMonth() {
   return startOfMonth(getToday());
 }
 
-export function getTodayNum() {
+function getTodayNum() {
   return getToday().getDate();
 }
 
-export function getThisWeekNum() {
+function getThisWeekNum() {
   return Math.ceil(getTodayNum() / 7);
+}
+
+export function getTodayNumBounded() {
+  return getTodayNum() > 28 ? 28 : getTodayNum();
+}
+
+export function getThisWeekNumBounded() {
+  return getThisWeekNum() > 4 ? 4 : getThisWeekNum();
 }
 
 export function getNextMonth() {

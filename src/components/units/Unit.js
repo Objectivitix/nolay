@@ -9,6 +9,12 @@ export default function Unit(
   const article = document.createElement("article");
   article.classList.add("unit");
 
+  article.appendChild(header);
+
+  if (!targets.length) {
+    return article;
+  }
+
   const ul = document.createElement("ul");
   ul.classList.add("targets");
 
@@ -18,7 +24,6 @@ export default function Unit(
     ),
   );
 
-  article.appendChild(header);
   article.appendChild(ul);
 
   return article;
