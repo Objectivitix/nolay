@@ -31,8 +31,6 @@ export default class App {
 
     buttons.forEach((button) =>
       button.addEventListener("click", () => {
-        MAIN.innerHTML = "";
-
         this.activeMenuButton.classList.remove("menu__button--active");
         button.classList.add("menu__button--active");
 
@@ -42,13 +40,13 @@ export default class App {
 
     nav
       .querySelector("[data-current]")
-      .addEventListener("click", this.loadCurrent.bind(this));
+      .addEventListener("click", App.refresh(() => this.loadCurrent()));
     nav
       .querySelector("[data-week]")
-      .addEventListener("click", this.loadThisWeek.bind(this));
+      .addEventListener("click", App.refresh(() => this.loadThisWeek()));
     nav
       .querySelector("[data-month]")
-      .addEventListener("click", this.loadThisMonth.bind(this));
+      .addEventListener("click", App.refresh(() => this.loadThisMonth()));
   }
 
   loadCurrent() {
@@ -63,41 +61,45 @@ export default class App {
     this.loadWeek(getThisWeekNumBounded());
   }
 
-  loadThisMonth() {
-    MAIN.appendChild(this.createMonthUnit());
+  loadThisMonth(project) {
+    MAIN.appendChild(this.createMonthUnit(project));
 
     for (const week of range(1, 5)) {
-      this.loadWeek(week);
+      this.loadWeek(week, project);
     }
   }
 
-  loadWeek(num) {
+  loadWeek(num, project) {
     const start = num * 7 - 6;
     const stop = start + 7;
 
-    MAIN.appendChild(this.createWeekUnit(num));
+    MAIN.appendChild(this.createWeekUnit(num, project));
 
     for (const day of range(start, stop)) {
-      MAIN.appendChild(this.createDayUnit(day));
+      MAIN.appendChild(this.createDayUnit(day, project));
     }
   }
 
   loadProjectTabs() {
     this.$.getProjects().forEach((project) =>
       PROJ.appendChild(
-        ProjectTab(project, (evt) => {
-          const li = evt.target.closest(".project");
+        ProjectTab(
+          project,
+          App.refresh(() => this.loadThisMonth(project)),
+          (evt) => {
+            const li = evt.target.closest(".project");
 
-          this.$.removeProject(project);
-          li.remove();
-        }),
+            this.$.removeProject(project);
+            li.remove();
+          },
+        ),
       ),
     );
   }
 
-  createMonthUnit() {
+  createMonthUnit(project) {
     return MonthUnit(
-      this.$.getMonthGoals(),
+      (project ?? this.$).getMonthGoals(),
       this.onUnitNew(
         "Create a new Goal for this month",
         this.$.createMonthGoal,
@@ -107,10 +109,10 @@ export default class App {
     );
   }
 
-  createWeekUnit(num) {
+  createWeekUnit(num, project) {
     return WeekUnit(
       num,
-      this.$.getWeekGoals(num),
+      (project ?? this.$).getWeekGoals(num),
       this.onUnitNew(
         `Create a new Goal for Week ${num}`,
         this.$.createWeekGoal,
@@ -121,10 +123,10 @@ export default class App {
     );
   }
 
-  createDayUnit(num) {
+  createDayUnit(num, project) {
     return DayUnit(
       num,
-      this.$.getDayTasks(num),
+      (project ?? this.$).getDayTasks(num),
       this.onUnitNew(
         `Create a new Task for Day ${num}`,
         this.$.createDayTask,
@@ -237,5 +239,12 @@ export default class App {
       target.remove();
       li.remove();
     };
+  }
+
+  static refresh(callback) {
+    return (...args) => {
+      MAIN.innerHTML = "";
+      callback(args);
+    }
   }
 }

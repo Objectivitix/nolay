@@ -1,6 +1,6 @@
 import DELETE from "../assets/icons/delete.svg";
 
-export default function ProjectTab(project, onDelete) {
+export default function ProjectTab(project, onClick, onDelete) {
   const li = document.createElement("li");
   li.classList.add("project");
 
@@ -11,6 +11,7 @@ export default function ProjectTab(project, onDelete) {
     >${project.title}</button>
     <button class="project__delete"><img src="${DELETE}"></button>`;
 
+  li.querySelector(".menu__button").addEventListener("click", onClick);
   li.querySelector(".project__delete").addEventListener("click", onDelete);
 
   return li;
