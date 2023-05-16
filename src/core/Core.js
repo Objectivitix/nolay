@@ -1,13 +1,14 @@
 import { getNextDay, getNextMonth, getNextWeek } from "../lib/dates";
+import DefaultProject from "./DefaultProject";
+import Note from "./Note";
 import Project from "./Project";
 import DayTask from "./targets/DayTask";
 import MonthGoal from "./targets/MonthGoal";
 import WeekGoal from "./targets/WeekGoal";
-import Note from "./Note";
 
 export default class Core {
   constructor() {
-    this.defaultProj = new Project("");
+    this.defaultProj = new DefaultProject();
 
     this.projects = [];
     this.projects.push(this.defaultProj);

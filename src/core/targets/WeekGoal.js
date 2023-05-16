@@ -1,5 +1,5 @@
-import { subDays } from "date-fns";
 import Target from "./Target";
+import { subDays } from "date-fns";
 
 export default class WeekGoal extends Target {
   constructor(weekNum, name, desc, dueDate, project) {

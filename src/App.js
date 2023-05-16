@@ -1,13 +1,12 @@
-import { getThisWeekNumBounded, getTodayNumBounded } from "./lib/dates";
-import range from "./lib/range";
-import Core from "./core/Core";
-import Target from "./components/units/Target";
-import MonthUnit from "./components/units/MonthUnit";
-import WeekUnit from "./components/units/WeekUnit";
-import DayUnit from "./components/units/DayUnit";
 import ProjectTab from "./components/ProjectTab";
 import NewTargetModal from "./components/modals/NewTargetModal";
-
+import DayUnit from "./components/units/DayUnit";
+import MonthUnit from "./components/units/MonthUnit";
+import Target from "./components/units/Target";
+import WeekUnit from "./components/units/WeekUnit";
+import Core from "./core/Core";
+import { getThisWeekNumBounded, getTodayNumBounded } from "./lib/dates";
+import range from "./lib/range";
 
 const MAIN = document.querySelector("main");
 const PROJ = document.querySelector(".projects__tabs");
