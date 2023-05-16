@@ -1,4 +1,8 @@
 .header {
+  position: sticky;
+  top: 0;
+  /* for strange bug where some target elements display above the header */
+  z-index: 1;
   grid-column: 1 / -1;
   display: flex;
   align-items: center;

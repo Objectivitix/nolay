@@ -2,10 +2,13 @@
 
 .sidebar {
   --padding-lr: 3.5rem;
+  position: sticky;
+  top: 7rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 6.5rem;
+  height: calc(100vh - 7rem);
   background-color: var(--grey-1);
   padding: 6rem 0;
 }
