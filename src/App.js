@@ -21,47 +21,24 @@ export default class App {
   initialize() {
     this.createExamples();
     this.loadProjectTabs();
-    this.bindMainMenu();
+    this.bindSidebar();
     this.loadCurrent();
   }
 
-  bindMainMenu() {
-    const nav = document.querySelector(".menu");
-    const buttons = nav.querySelectorAll(".menu__button");
-
-    buttons.forEach((button) =>
-      button.addEventListener("click", () => {
-        this.activeMenuButton.classList.remove("menu__button--active");
-        button.classList.add("menu__button--active");
-
-        this.activeMenuButton = button;
-      }),
-    );
-
-    nav
-      .querySelector("[data-current]")
-      .addEventListener("click", App.refresh(() => this.loadCurrent()));
-    nav
-      .querySelector("[data-week]")
-      .addEventListener("click", App.refresh(() => this.loadThisWeek()));
-    nav
-      .querySelector("[data-month]")
-      .addEventListener("click", App.refresh(() => this.loadThisMonth()));
-  }
-
   loadCurrent() {
-    const day = getTodayNumBounded();
-    const week = getThisWeekNumBounded();
+    MAIN.innerHTML = "";
 
-    MAIN.appendChild(this.createDayUnit(day));
-    MAIN.appendChild(this.createWeekUnit(week));
+    MAIN.appendChild(this.createDayUnit(getTodayNumBounded()));
+    MAIN.appendChild(this.createWeekUnit(getThisWeekNumBounded()));
   }
 
   loadThisWeek() {
+    MAIN.innerHTML = "";
     this.loadWeek(getThisWeekNumBounded());
   }
 
   loadThisMonth(project) {
+    MAIN.innerHTML = "";
     MAIN.appendChild(this.createMonthUnit(project));
 
     for (const week of range(1, 5)) {
@@ -85,7 +62,7 @@ export default class App {
       PROJ.appendChild(
         ProjectTab(
           project,
-          App.refresh(() => this.loadThisMonth(project)),
+          () => this.loadThisMonth(project),
           (evt) => {
             const li = evt.target.closest(".project");
 
@@ -95,6 +72,30 @@ export default class App {
         ),
       ),
     );
+  }
+
+  bindSidebar() {
+    const buttons = document.querySelectorAll(".menu__button");
+
+    buttons.forEach((button) =>
+      button.addEventListener("click", () => {
+        this.activeMenuButton.classList.remove("menu__button--active");
+        button.classList.add("menu__button--active");
+
+        this.activeMenuButton = button;
+      }),
+    );
+
+    App.bindMainMenuButton("current", () => this.loadCurrent());
+    App.bindMainMenuButton("week", () => this.loadThisWeek());
+    App.bindMainMenuButton("month", () => this.loadThisMonth());
+  }
+
+  static bindMainMenuButton(dataAttr, listener) {
+    document
+      .querySelector(".menu")
+      .querySelector(`[data-${dataAttr}]`)
+      .addEventListener("click", listener);
   }
 
   createMonthUnit(project) {
@@ -179,6 +180,15 @@ export default class App {
     );
   }
 
+  static makeModalHandler(createModal) {
+    return (parentEvent) => {
+      const modal = createModal(parentEvent);
+
+      MAIN.appendChild(modal);
+      modal.showModal();
+    };
+  }
+
   onUnitNew(modalTitle, createTarget, num = -1) {
     return App.makeModalHandler((parentEvent) =>
       NewTargetModal(modalTitle, this.$.projects, (evt) => {
@@ -216,15 +226,6 @@ export default class App {
     );
   }
 
-  static makeModalHandler(createModal) {
-    return (parentEvent) => {
-      const modal = createModal(parentEvent);
-
-      MAIN.appendChild(modal);
-      modal.showModal();
-    };
-  }
-
   static onTargetComplete(target) {
     return (evt) => {
       target.toggleCompletion();
@@ -239,12 +240,5 @@ export default class App {
       target.remove();
       li.remove();
     };
-  }
-
-  static refresh(callback) {
-    return (...args) => {
-      MAIN.innerHTML = "";
-      callback(args);
-    }
   }
 }

@@ -1,7 +1,3 @@
 import Project from "./Project";
 
-export default class DefaultProject extends Project {
-  constructor() {
-    super(undefined, undefined);
-  }
-}
+export default class DefaultProject extends Project {}
