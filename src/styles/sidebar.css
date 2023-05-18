@@ -84,14 +84,14 @@
   width: 2.25rem;
 }
 
-.project:not(.project--active):hover .menu__button {
+.project:hover .menu__button:not(.menu__button--active) {
   padding-right: 7rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.project:not(.project--active):hover .project__delete {
+.project:hover :not(.menu__button--active) + .project__delete {
   display: initial;
 }
 
