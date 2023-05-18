@@ -1,4 +1,4 @@
-/* BASE */
+/* MODAL */
 
 .modal {
   width: 90ch;
@@ -38,14 +38,12 @@
   width: 4rem;
 }
 
+/* FORM */
+
 .form {
   flex-grow: 1;
-
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: min-content 1fr;
   gap: 2rem;
-
   padding: 2.5rem;
   font-size: var(--fs-600);
 }
@@ -59,25 +57,36 @@
   border-radius: 1.5rem;
 }
 
-/* NEW TARGET */
-
-.new-target__container--name {
-  grid-column: 1 / -1;
+.form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.new-target__control {
+.form__control {
   background-color: var(--grey-1);
   width: 100%;
   padding: 1rem;
   border-radius: 0.5rem;
 }
 
-.new-target__container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+/* NEW TARGET */
+
+.form--new-target {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content;
 }
 
-.new-target__control--desc {
+.name {
+  grid-column: 1 / -1;
+}
+
+.desc__control {
   flex-grow: 1;
+}
+
+/* NEW PROJECT */
+
+.form--new-project {
+  grid-template-rows: min-content;
 }

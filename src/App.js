@@ -1,4 +1,5 @@
 import ProjectTab from "./components/ProjectTab";
+import NewProjectModal from "./components/modals/NewProjectModal";
 import NewTargetModal from "./components/modals/NewTargetModal";
 import DayUnit from "./components/units/DayUnit";
 import MonthUnit from "./components/units/MonthUnit";
@@ -59,18 +60,7 @@ export default class App {
 
   loadProjectTabs() {
     this.$.getProjects().forEach((project) =>
-      PROJ.appendChild(
-        ProjectTab(
-          project,
-          () => this.loadThisMonth(project),
-          (evt) => {
-            const li = evt.target.closest(".project");
-
-            this.$.removeProject(project);
-            li.remove();
-          },
-        ),
-      ),
+      PROJ.appendChild(this.createProjectTab(project)),
     );
   }
 
@@ -78,17 +68,16 @@ export default class App {
     const buttons = document.querySelectorAll(".menu__button");
 
     buttons.forEach((button) =>
-      button.addEventListener("click", () => {
-        this.activeMenuButton.classList.remove("menu__button--active");
-        button.classList.add("menu__button--active");
-
-        this.activeMenuButton = button;
-      }),
+      button.addEventListener("click", (evt) => this.onMenuButtonClick(evt)),
     );
 
     App.bindMainMenuButton("current", () => this.loadCurrent());
     App.bindMainMenuButton("week", () => this.loadThisWeek());
     App.bindMainMenuButton("month", () => this.loadThisMonth());
+
+    document
+      .querySelector(".projects__new")
+      .addEventListener("click", () => this.onNewProject());
   }
 
   static bindMainMenuButton(dataAttr, listener) {
@@ -101,7 +90,7 @@ export default class App {
   createMonthUnit(project) {
     return MonthUnit(
       (project ?? this.$).getMonthGoals(),
-      this.onUnitNew(
+      this.onNewTarget(
         "Create a new Goal for this month",
         this.$.createMonthGoal,
       ),
@@ -114,7 +103,7 @@ export default class App {
     return WeekUnit(
       num,
       (project ?? this.$).getWeekGoals(num),
-      this.onUnitNew(
+      this.onNewTarget(
         `Create a new Goal for Week ${num}`,
         this.$.createWeekGoal,
         num,
@@ -128,13 +117,26 @@ export default class App {
     return DayUnit(
       num,
       (project ?? this.$).getDayTasks(num),
-      this.onUnitNew(
+      this.onNewTarget(
         `Create a new Task for Day ${num}`,
         this.$.createDayTask,
         num,
       ),
       App.onTargetComplete,
       App.onTargetDelete,
+    );
+  }
+
+  createProjectTab(project) {
+    return ProjectTab(
+      project,
+      () => this.loadThisMonth(project),
+      (evt) => {
+        const li = evt.target.closest(".project");
+
+        this.$.removeProject(project);
+        li.remove();
+      },
     );
   }
 
@@ -189,7 +191,14 @@ export default class App {
     };
   }
 
-  onUnitNew(modalTitle, createTarget, num = -1) {
+  onMenuButtonClick(evt) {
+    this.activeMenuButton.classList.remove("menu__button--active");
+    evt.target.classList.add("menu__button--active");
+
+    this.activeMenuButton = evt.target;
+  }
+
+  onNewTarget(modalTitle, createTarget, num = -1) {
     return App.makeModalHandler((parentEvent) =>
       NewTargetModal(modalTitle, this.$.projects, (evt) => {
         const data = new FormData(evt.target);
@@ -224,6 +233,28 @@ export default class App {
         );
       }),
     );
+  }
+
+  onNewProject() {
+    const modal = NewProjectModal((evt) => {
+      const data = new FormData(evt.target);
+
+      const project = this.$.createProject(
+        data.get("title"),
+        data.get("emoji"),
+      );
+
+      const li = this.createProjectTab(project);
+
+      li.querySelector(".menu__button").addEventListener("click", (e) =>
+        this.onMenuButtonClick(e),
+      );
+
+      PROJ.appendChild(li);
+    });
+
+    MAIN.appendChild(modal);
+    modal.showModal();
   }
 
   static onTargetComplete(target) {

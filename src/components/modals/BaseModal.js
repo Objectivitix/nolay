@@ -7,7 +7,7 @@ export default function BaseModal(subject, title, onSubmit) {
   dialog.innerHTML = `
     <div class="modal__wrapper">
       <h3 class="modal__heading">${title}</h3>
-      <form class="form ${subject}" method="dialog">
+      <form class="form form--${subject}" method="dialog">
         <button class="modal__close" type="reset"><img src="${CLOSE}"></button>
         <button class="form__submit">Submit</button>
       </form>

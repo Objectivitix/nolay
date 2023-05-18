@@ -16,35 +16,35 @@ export default function NewTargetModal(title, projects, onSubmit) {
   form.insertAdjacentHTML(
     "beforeend",
     `
-    <label class="new-target__container new-target__container--name">
-      <p class="new-target__label new-target__label--name">Name</p>
+    <label class="form__container name">
+      <p class="form__label name__label">Name</p>
       <input
         name="name"
-        class="new-target__control new-target__control--name"
+        class="form__control name__control"
         type="text"
         maxlength="70"
         placeholder="e.g. complete modal logic for Todo List project"
         required
       >
     </label>
-    <label class="new-target__container new-target__container--desc">
-      <p class="new-target__label new-target__label--desc">Description</p>
+    <label class="form__container desc">
+      <p class="form__label desc__label">Description</p>
       <textarea
         name="desc"
-        class="new-target__control new-target__control--desc"
+        class="form__control desc__control"
         maxlength="500"
       ></textarea>
     </label>
-    <label class="new-target__container new-target__container--proj">
-      <p class="new-target__label new-target__label--proj">Project</p>
+    <label class="form__container proj">
+      <p class="form__label proj__label">Project</p>
       <select
         name="proj"
-        class="new-target__control new-target__control--proj"
+        class="form__control proj__control"
       ></select>
     </label>`,
   );
 
-  const select = form.querySelector(".new-target__control--proj");
+  const select = form.querySelector(".proj__control");
 
   projects.forEach((project, index) =>
     select.appendChild(ProjectOption(project.title, index)),
