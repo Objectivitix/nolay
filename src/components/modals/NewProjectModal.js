@@ -17,15 +17,6 @@ export default function NewProjectModal(onSubmit) {
         placeholder="e.g. Webdev"
         required
       >
-    </label>
-    <label class="form__container emoji">
-      <p class="form__label emoji__label">Give it an emoji!</p>
-      <select
-        name="emoji"
-        class="form__control emoji__control"
-      >
-        <option>😎</option>
-      </select>
     </label>`,
   );
 

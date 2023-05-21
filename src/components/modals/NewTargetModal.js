@@ -4,10 +4,7 @@ import BaseModal from "./BaseModal";
 function ProjectOption(project, index) {
   const option = document.createElement("option");
 
-  option.innerHTML =
-    project instanceof DefaultProject
-      ? "None"
-      : `${project.emoji}&nbsp;&nbsp;${project.title}`;
+  option.innerHTML = project instanceof DefaultProject ? "None" : project.title;
 
   option.value = String(index);
 

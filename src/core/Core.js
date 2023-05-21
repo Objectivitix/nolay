@@ -14,8 +14,8 @@ export default class Core {
     this.projects.push(this.defaultProj);
   }
 
-  createProject(title, emoji) {
-    const project = new Project(title, emoji);
+  createProject(title) {
+    const project = new Project(title);
 
     this.projects.push(project);
     return project;

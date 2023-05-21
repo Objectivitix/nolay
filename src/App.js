@@ -144,10 +144,10 @@ export default class App {
   }
 
   createExamples() {
-    const webdev = this.$.createProject("Webdev", "🌐");
-    const cp = this.$.createProject("Competitive Programming", "💻");
-    const star = this.$.createProject("Star", "🌠");
-    const spanish = this.$.createProject("Spanish", "🇪🇸");
+    const webdev = this.$.createProject("Webdev 🌐");
+    const cp = this.$.createProject("Competitive Programming 💻");
+    const star = this.$.createProject("Star 🌠");
+    const spanish = this.$.createProject("Spanish 🇪🇸");
 
     this.$.createDayTask(
       13,
@@ -243,12 +243,7 @@ export default class App {
   onNewProject() {
     const modal = NewProjectModal((evt) => {
       const data = new FormData(evt.target);
-
-      const project = this.$.createProject(
-        data.get("title"),
-        data.get("emoji"),
-      );
-
+      const project = this.$.createProject(data.get("title"));
       const li = this.createProjectTab(project);
 
       li.querySelector(".menu__button").addEventListener("click", (e) =>

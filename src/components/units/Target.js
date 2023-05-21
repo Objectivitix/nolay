@@ -6,9 +6,7 @@ export default function Target(target, onComplete, onDelete) {
   li.classList.add("target");
 
   const projectHTML = `
-    <p class="target__project" data-emoji="${target.project.emoji}">
-      ${target.project.title}
-    </p>`;
+    <p class="target__project">${target.project.title}</p>`;
 
   li.innerHTML = `
     <hgroup class="target__header">

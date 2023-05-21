@@ -3,9 +3,8 @@ import MonthGoal from "./targets/MonthGoal";
 import WeekGoal from "./targets/WeekGoal";
 
 export default class Project {
-  constructor(title, emoji) {
+  constructor(title) {
     this.title = title;
-    this.emoji = emoji;
     this.targets = [];
     this.notes = [];
   }

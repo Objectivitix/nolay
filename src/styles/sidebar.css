@@ -70,11 +70,6 @@
   overflow-wrap: break-word;
 }
 
-.menu__button--project::before {
-  content: attr(data-emoji);
-  margin-right: 1rem;
-}
-
 .project__delete {
   position: absolute;
   top: 50%;

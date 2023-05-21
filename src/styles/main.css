@@ -77,13 +77,6 @@
   font-size: var(--fs-300);
 }
 
-.target__project::before {
-  content: attr(data-emoji);
-  margin-right: 0.5rem;
-  font-size: var(--fs-200);
-  vertical-align: top;
-}
-
 .target__desc {
   color: var(--grey-4);
 }
