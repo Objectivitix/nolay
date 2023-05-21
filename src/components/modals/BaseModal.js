@@ -1,5 +1,16 @@
 import CLOSE from "../../assets/icons/close.svg";
 
+function isOutside(evt, element) {
+  const dimensions = element.getBoundingClientRect();
+
+  return (
+    evt.clientX < dimensions.left ||
+    evt.clientX > dimensions.right ||
+    evt.clientY < dimensions.top ||
+    evt.clientY > dimensions.bottom
+  );
+}
+
 export default function BaseModal(subject, title, onSubmit) {
   const dialog = document.createElement("dialog");
   dialog.classList.add("modal");
@@ -13,15 +24,19 @@ export default function BaseModal(subject, title, onSubmit) {
       </form>
     </div>`;
 
-  dialog.addEventListener("click", (evt) => {
-    const dialogDimensions = dialog.getBoundingClientRect();
-    if (
-      evt.clientX < dialogDimensions.left ||
-      evt.clientX > dialogDimensions.right ||
-      evt.clientY < dialogDimensions.top ||
-      evt.clientY > dialogDimensions.bottom
-    ) {
-      dialog.close();
+  dialog.addEventListener("mousedown", (evt) => {
+    if (isOutside(evt, dialog)) {
+      dialog.dataset.mousedownOutside = "";
+    }
+  });
+
+  dialog.addEventListener("mouseup", (evt) => {
+    if (dialog.dataset.mousedownOutside != null) {
+      if (isOutside(evt, dialog)) {
+        dialog.close();
+      } else {
+        delete dialog.dataset.mousedownOutside;
+      }
     }
   });
 
