@@ -66,7 +66,8 @@
 }
 
 .menu__button--project {
-  padding: 1.2rem var(--padding-lr);
+  padding: 1.2rem 7rem 1.2rem var(--padding-lr);
+  overflow-wrap: break-word;
 }
 
 .menu__button--project::before {
@@ -82,13 +83,6 @@
 
   display: none;
   width: 2.25rem;
-}
-
-.project:hover .menu__button:not(.menu__button--active) {
-  padding-right: 7rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .project:hover :not(.menu__button--active) + .project__delete {
