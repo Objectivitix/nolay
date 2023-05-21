@@ -1,9 +1,14 @@
+import DefaultProject from "../../core/DefaultProject";
 import BaseModal from "./BaseModal";
 
-function ProjectOption(title, index) {
+function ProjectOption(project, index) {
   const option = document.createElement("option");
 
-  option.textContent = index === 0 ? "None" : title;
+  option.innerHTML =
+    project instanceof DefaultProject
+      ? "None"
+      : `${project.emoji}&nbsp;&nbsp;${project.title}`;
+
   option.value = String(index);
 
   return option;
@@ -47,7 +52,7 @@ export default function NewTargetModal(title, projects, onSubmit) {
   const select = form.querySelector(".proj__control");
 
   projects.forEach((project, index) =>
-    select.appendChild(ProjectOption(project.title, index)),
+    select.appendChild(ProjectOption(project, index)),
   );
 
   return modal;

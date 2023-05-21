@@ -93,6 +93,7 @@ export default class App {
       this.onNewTarget(
         "Create a new Goal for this month",
         this.$.createMonthGoal,
+        project,
       ),
       App.onTargetComplete,
       App.onTargetDelete,
@@ -106,6 +107,7 @@ export default class App {
       this.onNewTarget(
         `Create a new Goal for Week ${num}`,
         this.$.createWeekGoal,
+        project,
         num,
       ),
       App.onTargetComplete,
@@ -120,6 +122,7 @@ export default class App {
       this.onNewTarget(
         `Create a new Task for Day ${num}`,
         this.$.createDayTask,
+        project,
         num,
       ),
       App.onTargetComplete,
@@ -198,15 +201,17 @@ export default class App {
     this.activeMenuButton = evt.target;
   }
 
-  onNewTarget(modalTitle, createTarget, num = -1) {
+  onNewTarget(modalTitle, createTarget, project, num = -1) {
+    const options = project ? [project] : this.$.projects;
+
     return App.makeModalHandler((parentEvent) =>
-      NewTargetModal(modalTitle, this.$.projects, (evt) => {
+      NewTargetModal(modalTitle, options, (evt) => {
         const data = new FormData(evt.target);
 
         const args = [
           data.get("name"),
           data.get("desc"),
-          this.$.projects[data.get("proj")],
+          options[data.get("proj")],
         ];
 
         if (num !== -1) {
