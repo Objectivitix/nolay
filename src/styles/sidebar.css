@@ -10,6 +10,9 @@
 
   background-color: var(--grey-1);
   padding: 6rem 0;
+
+  height: 100%;
+  overflow: auto;
 }
 
 .menu {
@@ -67,7 +70,6 @@
 
 .menu__button--project {
   padding: 1.2rem 7rem 1.2rem var(--padding-lr);
-  overflow-wrap: break-word;
 }
 
 .project__delete {
@@ -80,7 +82,7 @@
   width: 2.25rem;
 }
 
-.project:hover :not(.menu__button--active) + .project__delete {
+:not(.menu__button--active):hover + .project__delete {
   display: initial;
 }
 

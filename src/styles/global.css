@@ -96,7 +96,7 @@ button {
 
 body {
   display: grid;
-  grid-template-rows: 7rem 1fr;
-  grid-template-columns: 16vw 1fr;
+  grid-template-rows: 7rem auto;
+  grid-template-columns: min(25vw, 35rem) auto;
   height: 100vh;
 }

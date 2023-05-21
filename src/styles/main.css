@@ -3,7 +3,7 @@
 .main-wrapper {
   display: flex;
   justify-content: center;
-  padding: 0 7rem;
+  padding: 0 3rem;
   overflow: auto;
 }
 
@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   gap: 7rem;
-  width: min(90%, 80rem);
+  width: min(80%, 80rem);
   height: max-content;
   padding: 10rem 0;
 }
@@ -100,4 +100,25 @@
 
 .target:hover .target__delete {
   opacity: 1;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 60em) {
+  .main {
+    width: 90%;
+    padding: 7rem 0;
+  }
+}
+
+@media screen and (max-width: 50em) {
+  .main {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 40em) {
+  .main {
+    width: 100%;
+  }
 }
