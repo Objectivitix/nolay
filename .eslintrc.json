@@ -10,6 +10,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-param-reassign": "off",
     "no-restricted-syntax": [
       "error",
       "ForInStatement",

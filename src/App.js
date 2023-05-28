@@ -15,12 +15,12 @@ const PROJ = document.querySelector(".projects__tabs");
 
 export default class App {
   constructor() {
-    this.$ = new Core();
+    this.$ = Core.fromStorage();
     this.activeMenuButton = HOME;
   }
 
   initialize() {
-    this.createExamples();
+    // this.createExamples();
     this.loadProjectTabs();
     this.bindSidebar();
     this.loadCurrent();
@@ -59,7 +59,7 @@ export default class App {
   }
 
   loadProjectTabs() {
-    this.$.getProjects().forEach((project) =>
+    this.$.projects.forEach((project) =>
       PROJ.appendChild(this.createProjectTab(project)),
     );
   }
@@ -95,8 +95,8 @@ export default class App {
         this.$.createMonthGoal,
         project,
       ),
-      App.onTargetComplete,
-      App.onTargetDelete,
+      this.onTargetComplete.bind(this),
+      this.onTargetDelete.bind(this),
     );
   }
 
@@ -110,8 +110,8 @@ export default class App {
         project,
         num,
       ),
-      App.onTargetComplete,
-      App.onTargetDelete,
+      this.onTargetComplete.bind(this),
+      this.onTargetDelete.bind(this),
     );
   }
 
@@ -125,8 +125,8 @@ export default class App {
         project,
         num,
       ),
-      App.onTargetComplete,
-      App.onTargetDelete,
+      this.onTargetComplete.bind(this),
+      this.onTargetDelete.bind(this),
     );
   }
 
@@ -202,10 +202,10 @@ export default class App {
   }
 
   onNewTarget(modalTitle, createTarget, project, num = -1) {
-    const options = project ? [project] : this.$.projects;
+    return App.makeModalHandler((parentEvent) => {
+      const options = project ? [project] : this.$.getAllProjects();
 
-    return App.makeModalHandler((parentEvent) =>
-      NewTargetModal(modalTitle, options, (evt) => {
+      return NewTargetModal(modalTitle, options, (evt) => {
         const data = new FormData(evt.target);
 
         const args = [
@@ -232,12 +232,12 @@ export default class App {
         ul.appendChild(
           Target(
             target,
-            App.onTargetComplete(target),
-            App.onTargetDelete(target),
+            this.onTargetComplete(target),
+            this.onTargetDelete(target),
           ),
         );
-      }),
-    );
+      });
+    });
   }
 
   onNewProject() {
@@ -257,18 +257,17 @@ export default class App {
     modal.showModal();
   }
 
-  static onTargetComplete(target) {
+  onTargetComplete(target) {
     return (evt) => {
-      target.toggleCompletion();
-      evt.target.classList.add("on");
+      this.$.toggleCompletion(target);
+      evt.currentTarget.classList.toggle("target__complete--active");
     };
   }
 
-  static onTargetDelete(target) {
+  onTargetDelete(target) {
     return (evt) => {
       const li = evt.target.closest(".target");
-
-      target.remove();
+      this.$.removeTarget(target);
       li.remove();
     };
   }

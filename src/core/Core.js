@@ -2,6 +2,7 @@ import { getNextDay, getNextMonth, getNextWeek } from "../lib/dates";
 import DefaultProject from "./DefaultProject";
 import Note from "./Note";
 import Project from "./Project";
+import Storage from "./Storage";
 import DayTask from "./targets/DayTask";
 import MonthGoal from "./targets/MonthGoal";
 import WeekGoal from "./targets/WeekGoal";
@@ -9,15 +10,22 @@ import WeekGoal from "./targets/WeekGoal";
 export default class Core {
   constructor() {
     this.defaultProj = new DefaultProject();
-
     this.projects = [];
-    this.projects.push(this.defaultProj);
+  }
+
+  static fromStorage() {
+    return Object.assign(new Core(), Storage.load());
+  }
+
+  save() {
+    Storage.save(this);
   }
 
   createProject(title) {
     const project = new Project(title);
 
     this.projects.push(project);
+    this.save();
     return project;
   }
 
@@ -26,6 +34,7 @@ export default class Core {
     const monthGoal = new MonthGoal(name, desc, dueDate, project);
 
     project.addTarget(monthGoal);
+    this.save();
     return monthGoal;
   }
 
@@ -34,6 +43,7 @@ export default class Core {
     const weekGoal = new WeekGoal(weekNum, name, desc, dueDate, project);
 
     project.addTarget(weekGoal);
+    this.save();
     return weekGoal;
   }
 
@@ -42,6 +52,7 @@ export default class Core {
     const dayTask = new DayTask(dayNum, name, desc, dueDate, project);
 
     project.addTarget(dayTask);
+    this.save();
     return dayTask;
   }
 
@@ -49,27 +60,36 @@ export default class Core {
     const note = new Note(title, details, project);
 
     project.addNote(note);
+    this.save();
     return note;
   }
 
-  getProjects() {
-    return this.projects.filter((proj) => proj !== this.defaultProj);
+  getAllProjects() {
+    return [this.defaultProj, ...this.projects];
   }
 
   getMonthGoals() {
-    return this.projects.map((proj) => proj.getMonthGoals()).flat();
+    return this.getAllProjects()
+      .map((proj) => proj.getMonthGoals())
+      .flat();
   }
 
   getWeekGoals(weekNum) {
-    return this.projects.map((proj) => proj.getWeekGoals(weekNum)).flat();
+    return this.getAllProjects()
+      .map((proj) => proj.getWeekGoals(weekNum))
+      .flat();
   }
 
   getDayTasks(dayNum) {
-    return this.projects.map((proj) => proj.getDayTasks(dayNum)).flat();
+    return this.getAllProjects()
+      .map((proj) => proj.getDayTasks(dayNum))
+      .flat();
   }
 
   getNotes() {
-    return this.projects.map((proj) => proj.notes).flat();
+    return this.getAllProjects()
+      .map((proj) => proj.notes)
+      .flat();
   }
 
   removeProject(project) {
@@ -80,6 +100,23 @@ export default class Core {
     project.notes.forEach((n) => this.defaultProj.addNote(n));
 
     this.projects.splice(this.projects.indexOf(project), 1);
+
+    this.save();
+  }
+
+  removeTarget(target) {
+    target.remove();
+    this.save();
+  }
+
+  removeNote(note) {
+    note.remove();
+    this.save();
+  }
+
+  toggleCompletion(target) {
+    target.toggleCompletion();
+    this.save();
   }
 
   unlinkItem(item) {

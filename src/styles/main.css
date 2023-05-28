@@ -90,6 +90,19 @@
   border-radius: 0.3rem;
 }
 
+.target__complete--active {
+  background-color: limegreen;
+  border-color: limegreen;
+}
+
+.target__check {
+  display: none;
+}
+
+.target__complete--active > .target__check {
+  display: initial;
+}
+
 .target__delete {
   opacity: 0;
   position: absolute;

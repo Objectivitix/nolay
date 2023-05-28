@@ -5,7 +5,6 @@ function ProjectOption(project, index) {
   const option = document.createElement("option");
 
   option.innerHTML = project instanceof DefaultProject ? "None" : project.title;
-
   option.value = String(index);
 
   return option;
