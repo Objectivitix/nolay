@@ -146,6 +146,6 @@ body {
 
 @media screen and (max-width: 40em) {
   body {
-    grid-template-columns: min(70vw, 25rem) auto;
+    grid-template-columns: min(70vw, 30rem) auto;
   }
 }
