@@ -102,3 +102,18 @@
 .sidebar__github-link {
   width: 3rem;
 }
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 45em) {
+  .sidebar {
+    display: none;
+    grid-column: 1;
+    grid-row: 2;
+    z-index: 1;
+  }
+
+  .sidebar--active {
+    display: flex;
+  }
+}

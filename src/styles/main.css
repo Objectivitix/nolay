@@ -130,7 +130,12 @@
   }
 }
 
-@media screen and (max-width: 40em) {
+@media screen and (max-width: 45em) {
+  .main-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
   .main {
     width: 100%;
   }

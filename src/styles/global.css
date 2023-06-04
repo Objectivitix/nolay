@@ -100,3 +100,9 @@ body {
   grid-template-columns: min(25vw, 35rem) auto;
   height: 100vh;
 }
+
+@media screen and (max-width: 45em) {
+  body {
+    grid-template-columns: min(70vw, 25rem) auto;
+  }
+}
