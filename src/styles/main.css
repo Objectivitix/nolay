@@ -126,17 +126,17 @@
 
 @media screen and (max-width: 50em) {
   .main {
-    width: 95%;
+    width: 100%;
   }
 }
 
-@media screen and (max-width: 45em) {
+@media screen and (max-width: 40em) {
   .main-wrapper {
     grid-column: 1 / -1;
     grid-row: 2;
   }
 
   .main {
-    width: 100%;
+    width: 95%;
   }
 }

@@ -105,7 +105,13 @@
 
 /* MEDIA QUERIES */
 
-@media screen and (max-width: 45em) {
+@media screen and (max-width: 50em) {
+  .sidebar {
+    --padding-lr: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 40em) {
   .sidebar {
     display: none;
     grid-column: 1;

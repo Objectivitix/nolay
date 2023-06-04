@@ -1,4 +1,6 @@
 .header {
+  position: relative;
+
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
@@ -13,12 +15,6 @@
   padding: 1.5rem 2rem;
 }
 
-.header__sidebar-toggle {
-  display: none;
-  width: 4rem;
-  margin-right: auto;
-}
-
 .header__logo {
   height: 100%;
 }
@@ -29,7 +25,20 @@
   color: var(--white);
 }
 
-@media screen and (max-width: 45em) {
+.header__sidebar-toggle {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1.375rem;
+  width: 4.5rem;
+}
+
+@media screen and (max-width: 40em) {
+  .header {
+    justify-content: center;
+  }
+
   .header__sidebar-toggle {
     display: initial;
   }
