@@ -21,6 +21,7 @@ export default class App {
 
   initialize() {
     this.loadProjectTabs();
+    App.bindSidebarToggler();
     this.bindSidebar();
     this.loadCurrent();
   }
@@ -84,6 +85,15 @@ export default class App {
       .querySelector(".menu")
       .querySelector(`[data-${dataAttr}]`)
       .addEventListener("click", listener);
+  }
+
+  static bindSidebarToggler() {
+    const toggler = document.querySelector(".header__sidebar-toggle");
+    const sidebar = document.querySelector(".sidebar");
+
+    toggler.addEventListener("click", () =>
+      sidebar.classList.toggle("sidebar--active"),
+    );
   }
 
   createMonthUnit(project) {
