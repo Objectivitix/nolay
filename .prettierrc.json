@@ -1,5 +1,7 @@
 {
-  "trailingComma": "all",
+  "importOrder": ["^\\./"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
   "overrides": [
     {
       "files": "*.html",
@@ -7,5 +9,6 @@
         "printWidth": 100
       }
     }
-  ]
+  ],
+  "trailingComma": "all"
 }

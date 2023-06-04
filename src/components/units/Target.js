@@ -17,7 +17,9 @@ export default function Target(target, onComplete, onDelete) {
     ${
       /\S/.test(target.desc) ? `<p class="target__desc">${target.desc}</p>` : ""
     }
-    <button class="target__complete ${target.completed ? "target__complete--active" : ""}">
+    <button class="target__complete ${
+      target.completed ? "target__complete--active" : ""
+    }">
       <img class="target__check" src="${CHECK}">
     </button>
     <button class="target__delete"><img src="${DELETE}"></button>`;

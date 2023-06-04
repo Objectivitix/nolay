@@ -1,9 +1,10 @@
 import { parse, stringify } from "flatted";
+
+import DefaultProject from "./DefaultProject";
 import Project from "./Project";
 import DayTask from "./targets/DayTask";
 import MonthGoal from "./targets/MonthGoal";
 import WeekGoal from "./targets/WeekGoal";
-import DefaultProject from "./DefaultProject";
 
 const CONSTRUCTORS = {
   month: MonthGoal,

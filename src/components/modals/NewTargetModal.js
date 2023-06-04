@@ -1,4 +1,5 @@
 import DefaultProject from "../../core/DefaultProject";
+
 import BaseModal from "./BaseModal";
 
 function ProjectOption(project, index) {

@@ -13,6 +13,7 @@
   "author": "Objectivitix",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^5.0.0",
     "eslint": "^8.39.0",
