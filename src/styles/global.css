@@ -1,6 +1,44 @@
 /* FONTS */
 
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap");
+@font-face {
+  font-family: "Inconsolata";
+  src: url("../assets/fonts/inconsolata-400.woff2") format("woff2"),
+       url("../assets/fonts/inconsolata-400.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url("../assets/fonts/inconsolata-700.woff2") format("woff2"),
+       url("../assets/fonts/inconsolata-700.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto-400.woff2") format("woff2"),
+       url("../assets/fonts/roboto-400.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto-500.woff2") format("woff2"),
+       url("../assets/fonts/roboto-500.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto-700.woff2") format("woff2"),
+       url("../assets/fonts/roboto-700.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
 
 /* RESET */
 
@@ -57,7 +95,6 @@ textarea {
   --fs-800: 2.8rem;
   --fs-900: 3.2rem;
 
-  --fw-lgt: 300;
   --fw-reg: 400;
   --fw-med: 500;
   --fw-bld: 700;
