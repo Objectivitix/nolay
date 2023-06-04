@@ -6,6 +6,7 @@ module.exports = {
   entry: "./src/index.js",
   plugins: [
     new HTMLWebpackPlugin({
+      favicon: "./src/favicon.svg",
       template: "./src/index.html",
     }),
     new MiniCSSExtractPlugin(),
