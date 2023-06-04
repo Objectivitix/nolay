@@ -1,6 +1,5 @@
 export default class Target {
-  constructor(type, name, desc, dueDate, project) {
-    this.type = type;
+  constructor(name, desc, dueDate, project) {
     this.name = name;
     this.desc = desc;
     this.dueDate = dueDate;
