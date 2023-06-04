@@ -46,32 +46,32 @@ function revive(constructor, deserialized, additionalProcessing) {
   return instance;
 }
 
-export default class Storage {
-  static save(core) {
-    localStorage.setItem("core", JSON.stringify(core, targetReplacer));
+function reviveTargets(project) {
+  project.targets = project.targets.map((target) =>
+    revive(CONSTRUCTORS.get(target.type), target, (instance) => {
+      instance.project = project;
+    }),
+  );
+}
+
+export function saveToStorage(core) {
+  localStorage.setItem("core", JSON.stringify(core, targetReplacer));
+}
+
+export function loadStorage() {
+  const raw = localStorage.getItem("core");
+
+  if (raw == null) {
+    return {};
   }
 
-  static load() {
-    const raw = localStorage.getItem("core");
+  const data = JSON.parse(raw);
 
-    if (raw == null) {
-      return {};
-    }
+  data.defaultProj = revive(DefaultProject, data.defaultProj);
+  reviveTargets(data.defaultProj);
 
-    const data = JSON.parse(raw);
+  data.projects = data.projects.map((project) => revive(Project, project));
+  data.projects.forEach(reviveTargets);
 
-    data.defaultProj = revive(DefaultProject, data.defaultProj);
-
-    data.projects = data.projects.map((project) => revive(Project, project));
-
-    [data.defaultProj, ...data.projects].forEach((project) => {
-      project.targets = project.targets.map((target) =>
-        revive(CONSTRUCTORS.get(target.type), target, (instance) => {
-          instance.project = project;
-        }),
-      );
-    });
-
-    return data;
-  }
+  return data;
 }

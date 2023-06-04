@@ -1,6 +1,7 @@
+import DefaultProject from "../../core/DefaultProject";
+
 import CHECK from "../../assets/icons/check.svg";
 import DELETE from "../../assets/icons/delete.svg";
-import DefaultProject from "../../core/DefaultProject";
 
 export default function Target(target, onComplete, onDelete) {
   const li = document.createElement("li");

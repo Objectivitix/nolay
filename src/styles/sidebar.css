@@ -82,7 +82,7 @@
   width: 2.25rem;
 }
 
-:not(.menu__button--active):hover + .project__delete {
+.project:hover :not(.menu__button--active) + .project__delete {
   display: initial;
 }
 

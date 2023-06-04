@@ -20,7 +20,6 @@ export default class App {
   }
 
   initialize() {
-    // this.createExamples();
     this.loadProjectTabs();
     this.bindSidebar();
     this.loadCurrent();
@@ -140,48 +139,6 @@ export default class App {
         this.$.removeProject(project);
         li.remove();
       },
-    );
-  }
-
-  createExamples() {
-    const webdev = this.$.createProject("Webdev 🌐");
-    const cp = this.$.createProject("Competitive Programming 💻");
-    const star = this.$.createProject("Star 🌠");
-    const spanish = this.$.createProject("Spanish 🇪🇸");
-
-    this.$.createDayTask(
-      13,
-      "complete HTML of Todo List project",
-      `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi minus
-      veniam sit dolorum libero quo doloremque dolorem amet tempora! Doloremque
-      aliquid omnis laboriosam accusantium ducimus!`,
-      webdev,
-    );
-
-    this.$.createDayTask(
-      13,
-      "understand the Fenwick tree and practice 1 problem",
-      "",
-      cp,
-    );
-
-    this.$.createDayTask(
-      13,
-      "reach for the stars",
-      "The essence of Nolay.",
-      star,
-    );
-
-    this.$.createWeekGoal(
-      2,
-      "complete 5 20-minute Ouino sessions",
-      `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
-      provident aliquid beatae sint quidem tempore voluptas nam soluta eos fuga
-      quae numquam, reprehenderit sapiente nulla esse in maxime, laudantium
-      dignissimos incidunt facere consequatur assumenda ex. Praesentium sunt
-      cumque obcaecati hic, aperiam sint non voluptate corporis error quibusdam
-      provident molestiae tempora.`,
-      spanish,
     );
   }
 

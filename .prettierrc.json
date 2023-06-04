@@ -1,5 +1,5 @@
 {
-  "importOrder": ["^\\./"],
+  "importOrder": ["assets", "styles", "^\\./"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "overrides": [

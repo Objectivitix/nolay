@@ -3,7 +3,7 @@ import { getNextDay, getNextMonth, getNextWeek } from "../lib/dates";
 import DefaultProject from "./DefaultProject";
 import Note from "./Note";
 import Project from "./Project";
-import Storage from "./Storage";
+import { loadStorage, saveToStorage } from "./Storage";
 import DayTask from "./targets/DayTask";
 import MonthGoal from "./targets/MonthGoal";
 import WeekGoal from "./targets/WeekGoal";
@@ -15,11 +15,11 @@ export default class Core {
   }
 
   static fromStorage() {
-    return Object.assign(new Core(), Storage.load());
+    return Object.assign(new Core(), loadStorage());
   }
 
   save() {
-    Storage.save(this);
+    saveToStorage(this);
   }
 
   createProject(title) {
@@ -27,6 +27,7 @@ export default class Core {
 
     this.projects.push(project);
     this.save();
+
     return project;
   }
 
@@ -36,6 +37,7 @@ export default class Core {
 
     project.addTarget(monthGoal);
     this.save();
+
     return monthGoal;
   }
 
@@ -45,6 +47,7 @@ export default class Core {
 
     project.addTarget(weekGoal);
     this.save();
+
     return weekGoal;
   }
 
@@ -54,6 +57,7 @@ export default class Core {
 
     project.addTarget(dayTask);
     this.save();
+
     return dayTask;
   }
 
@@ -62,6 +66,7 @@ export default class Core {
 
     project.addNote(note);
     this.save();
+
     return note;
   }
 
