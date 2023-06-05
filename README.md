@@ -43,5 +43,6 @@ Recently I was touched by the idea that it's often better to complete several pr
 - Notes - the user can write project-specific reminders and notes
 - A modal that confirms deletion
 - Transitions and animations
+- Dark theme
 - Overdue targets
 - Ask users whether they want to clear all targets at the start of a new month
