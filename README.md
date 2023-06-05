@@ -38,11 +38,19 @@ Give me a try, for I am perchance the regimen you need.
 
 Recently I was touched by the idea that it's often better to complete several projects than to spend too much time crafting one to perfection. I think this applies all too well to webdev. Nolay has been stuck in development hell for two months, so it's time to move on, albeit all its (my perceived) imperfections.
 
-**Extra stuff originally planned for Nolay:**
+### Extra stuff originally planned for Nolay
+
+**Content:**
 - Home/about page
+
+**Features:**
 - Notes - the user can write project-specific reminders and notes
+- Overdue targets and rescheduling
+
+**Quality of life:**
 - A modal that confirms deletion
-- Transitions and animations
+- Clear all targets - asked at the start of a new month
+
+**Styling:**
+- Transitions, animations, hover states
 - Dark theme
-- Overdue targets
-- Ask users whether they want to clear all targets at the start of a new month

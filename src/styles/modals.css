@@ -95,7 +95,7 @@
 
 @media screen and (max-width: 40em) {
   .modal__heading {
-    padding: 1.25rem 1.75rem;
+    padding: 1.25rem 5.5rem 1.25rem 1.75rem;
     font-size: var(--fs-700);
   }
 

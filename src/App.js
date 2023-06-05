@@ -10,7 +10,8 @@ import { getThisWeekNumBounded, getTodayNumBounded } from "./lib/dates";
 import range from "./lib/range";
 
 const HOME = document.querySelector("[data-current]");
-const MAIN = document.querySelector("main");
+const MAIN = document.querySelector(".main");
+const SIDE = document.querySelector(".sidebar");
 const PROJ = document.querySelector(".projects__tabs");
 
 export default class App {
@@ -89,10 +90,9 @@ export default class App {
 
   static bindSidebarToggler() {
     const toggler = document.querySelector(".header__sidebar-toggle");
-    const sidebar = document.querySelector(".sidebar");
 
     toggler.addEventListener("click", () =>
-      sidebar.classList.toggle("sidebar--active"),
+      SIDE.classList.toggle("sidebar--active"),
     );
   }
 
@@ -162,6 +162,8 @@ export default class App {
   }
 
   onMenuButtonClick(evt) {
+    SIDE.classList.remove("sidebar--active");
+
     this.activeMenuButton.classList.remove("menu__button--active");
     evt.target.classList.add("menu__button--active");
 
