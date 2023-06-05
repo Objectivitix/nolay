@@ -2,13 +2,13 @@
 
 .modal {
   width: 90ch;
-  height: 55vh;
+  height: min(80vh, 55rem);
   margin: auto;
   border-radius: 1.5rem;
 }
 
 .modal::backdrop {
-  background-color: hsl(0 0% 0% / 15%);
+  backdrop-filter: blur(4px);
 }
 
 .modal__wrapper {
@@ -89,4 +89,23 @@
 
 .form--new-project {
   grid-template-rows: min-content;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 40em) {
+  .modal__heading {
+    padding: 1.25rem 1.75rem;
+    font-size: var(--fs-700);
+  }
+
+  .modal__close {
+    right: 1rem;
+    top: 0.875rem;
+    width: 3.5rem;
+  }
+
+  .form--new-target {
+    grid-template-columns: none;
+  }
 }

@@ -25,7 +25,7 @@ export default function NewTargetModal(title, projects, onSubmit) {
         class="form__control name__control"
         type="text"
         maxlength="70"
-        placeholder="e.g. complete modal logic for Todo List project"
+        placeholder="e.g. make Nolay responsive"
         required
       >
     </label>
